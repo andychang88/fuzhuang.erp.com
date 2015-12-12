@@ -1,0 +1,44 @@
+ <meta charset='utf-8'><include file="./app/Home/View/header.html"  title="{$title}"  />
+    
+    
+     <a href="__URL__/index/plans_id/{$Think.get.plans_id}">返回出货列表</a>
+     
+               <FORM method="post" action="__URL__/update"  enctype="multipart/form-data" >
+               
+               <table>
+               
+               <tr>
+				       <td>Sku</td> <td>{$vo.sku}</td>
+			   </tr>	
+			   <tr>
+				       <td>品牌</td> <td>{$vo.brand} ({$vo.lang})</td>
+			   </tr>	
+			  
+			   <tr>
+				       <td>出货数量</td> <td><input type="text" name="amount_ready" value="{$vo.amount_ready}" /></td>
+			   </tr>
+			  
+			   <tr>
+				       <td>出货日期</td> <td>
+				       <input name="produce_time" id="ebayTestStart"  value="{$vo.add_time|date='Y-m-d',###}"  type="text" class="" onclick="WdatePicker(  {  startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'en'  }  )" />
+				       </td>
+			   </tr>
+			  
+			   
+			   <tr>
+				       <td>备注</td> <td><textarea name="memo" cols="50" rows="3"></textarea></td>
+			   </tr>
+			   		
+               <tr>
+               	<td colspan = 2>
+				<INPUT type="hidden" name="id" value="{$vo.id}">
+               	<INPUT type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;
+               	<INPUT type="reset" value="重置">
+               	</td>
+               </tr>
+               
+               </table>
+    
+    </FORM>
+     </body>
+    </html>

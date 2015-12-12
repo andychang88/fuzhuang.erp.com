@@ -1,0 +1,87 @@
+
+<div class="main">
+
+<include file="./app/Home/View/Finance/search_paymenthistory.html" />
+<br>
+
+<notempty name="msg_tip">
+   <h2>{$msg_tip}</h2>
+</notempty>
+               
+<table class='table table-condensed table-hover table-striped tablesorter table-fixed' >
+    <thead>
+    <tr class='colhead'>
+	        <th class="w-no">编号</th>
+	        <th>产品单号</th>
+	        <th>应付款总金额</th>
+	        <th>已付款总金额</th>
+	        <th>本次付款金额</th>
+	        <th class="w-photo">付款凭证</th>
+	        <th>付款时间</th>
+	        <th>分销商</th>
+	        <th>付款操作人</th>
+	        <th>付款状态</th>
+	        <th>备注</th>
+	        <th class="w-operat">操作</th>
+	</tr>
+	</thead>
+	
+    <volist name="data" id="vo">
+    	
+	    <tr  class='text-center' >
+	        <td>{$vo.id}</td>
+	        <td><a href="__MODULE__/Retailer/myGoods?orderno={$vo.orderno}" target="_blank">{$vo.orderno}</a></td>
+	        <td>{$vo.totalAmountShouldPaid}</td>
+	        <td>{$vo.totalAmountAlreadyPaid}</td>
+	        <td>{$vo.paid_amount}</td>
+	        <td>
+	        
+	        <empty name="vo.cert_img"> 
+	        	{$vo.title} 
+	        <else />
+	        
+	        <a  rel="group"  href="__PUBLIC__/{$vo.cert_img}">
+	        <img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.cert_img}" alt="{$vo.orderno}"  title="{$vo.orderno}" />
+	        </a>
+	        </empty>
+	        
+	        </td>
+	        <td>{$vo.paid_time|format_time}</td>
+	        <td>{$vo.retailer_name}</td>
+	        <td>{$vo.operator_name}</td>
+	         <td>{$vo.status_name}</td>
+	        <td>{$vo.memo}</td>
+	      
+	        <td>
+	        
+	        <if condition="$vo.audit_status eq 0 ">
+	        	<a href="__URL__/audit/id/{$vo.id}/status/1">审核通过</a>
+	        	<a href="__URL__/audit/id/{$vo.id}/status/2">审核驳回</a>
+	        	<br>
+	        	<a onclick="return confirm('确定要设置为结算完成吗？设置结算完成后分销商就可以录入售出数据了！')" href="__URL__/clean/id/{$vo.id}/retailer2goods_id/{$vo.retailer2goods_id}">结算完成</a>
+	        </if>
+	        
+	        
+	        <if condition="$vo.audit_status eq 1">
+	        	审核已通过
+	        <elseif condition="$vo.audit_status eq 2" />
+	        	审核已驳回
+	        </if>
+	       
+	       
+	       
+	        </td>
+	    </tr>
+	  
+    </volist>
+    
+    <tr><td class="pager" colspan=10><div class="viciao">{$page}</div></td></tr>
+    
+    
+	<empty name="data">
+	 <tr><td  class='text-center'  colspan=10>没有数据</td></tr>
+	</empty>
+	
+    </table>
+  </div>  
+    

@@ -1,0 +1,59 @@
+<meta charset='utf-8'>
+<include file="./app/Home/View/header.html"  title="{$title}"  />
+    
+    <script language="javascript">
+		
+	</script>
+
+     <a href="__URL__/index">返回计划单列表</a>
+     
+               <FORM method="post" target="_blank" action="__URL__/insertPlan"  enctype="multipart/form-data" >
+               
+               <table>
+               
+               <tr>
+				       <td class="right">Sku</td> <td><input type="text" name="sku" value="" /></td>
+			   </tr>
+
+			    <tr>
+				       <td class="right">明细</td> <td>
+						   <table class=" w-350px" id="tbl2"  align="center" >
+						  		<include file="./app/Home/View/goods_dimention.html"    />
+						   </table>
+					   </td>
+			   </tr>	
+
+			  
+			   <tr>
+				       <td class="right">产品描述</td> <td><input type="text" name="title" value="" /></td>
+			   </tr>
+			  
+			   <tr>
+				       <td class="right">预计成本</td> <td><input type="text" name="total_cost" value="" /></td>
+			   </tr>
+			   <tr>
+				       <td class="right">预计出货日期</td> <td>
+				       <input name="produce_time" id="ebayTestStart"  value=""  type="text" class="" onclick="WdatePicker(  {  startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'en'  }  )" />
+				       </td>
+			   </tr>
+			   <tr>
+				       <td class="right">产品图片</td> <td><input type="file" name="photo" /></td>
+			   </tr>
+			   
+			   <tr>
+				       <td class="right">备注</td> <td><textarea name="memo" cols="50" rows="3"></textarea></td>
+			   </tr>
+			   		
+               <tr>
+               	<td  class="center padding20" colspan = 2>
+               	<INPUT type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;
+               	<INPUT type="reset" value="重置">
+               	</td>
+               </tr>
+               
+               </table>
+    
+    </FORM>
+
+     </body>
+    </html>

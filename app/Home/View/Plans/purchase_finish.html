@@ -1,0 +1,49 @@
+<meta charset='utf-8'>
+<include file="./app/Home/View/header.html"  title="{$title}"  />
+    
+ 
+
+     <a href="__URL__/index">返回计划单列表</a>
+     
+               <FORM method="post"  action="__URL__/purchase_finish"  enctype="multipart/form-data" >
+               
+               <table>
+               
+               <tr>
+				       <td class="right">Sku</td> <td>
+					   <empty name="vo.photo"> 
+							{$vo.title} 
+						<else />
+						
+						<a  rel="group"  id="{$vo.sku}-{$vo.id}" href="__PUBLIC__/{$vo.photo}">
+						<img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.photo}" alt="{$vo.title}"  title="{$vo.title}" />
+						</a>
+						</empty>
+					   </td>
+			   </tr>
+
+			   <tr>
+				       <td class="right">采购完成日期</td> <td>
+				       <input name="purchase_finish_time" id="ebayTestStart"  
+					   value="<notempty name='vo.purchase_finish_time'>{$vo.purchase_finish_time|date='Y-m-d',###}</notempty>"  type="text" class="" onclick="WdatePicker(  {  startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',lang:'en'  }  )" />
+				       </td>
+			   </tr>
+			  
+			   <tr>
+				       <td class="right">备注</td> <td><textarea name="memo" cols="50" rows="3">{$vo.memo}</textarea></td>
+			   </tr>
+			   		
+               <tr>
+               	<td  class="center padding20" colspan = 2>
+				<INPUT type="hidden" name="id" value="{$vo.id}">
+               	<INPUT type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;
+               	<INPUT type="reset" value="重置">
+               	</td>
+               </tr>
+               
+               </table>
+    
+    </FORM>
+
+     </body>
+    </html>

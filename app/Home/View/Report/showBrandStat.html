@@ -1,0 +1,59 @@
+<div class="main">
+
+<js href="/Public/Js/Chart.js" />
+<style type="text/css">
+.bar_icon{
+display:inline-block;overflow:hidden;width:15px;height:15px;font-size:0;line-height:0;color:rgba(0,0,0,0);vertical-align:middle;
+}
+.floatleft{float:left;padding-left:20px;}
+.iconTitle{width: 50%;padding-bottom:20px;}
+.search_table{margin-left:20px;}
+</style>
+
+
+	<FORM method="get" id="search_frm"  action="" >
+               <table class="search_table">
+               
+               <tr>
+               	<td>统计时间范围：</td><td><input  class="w-120px form-date" type="text" name="starttime" value="{$starttime}" /> ~ <input  class="w-120px form-date" type="text" name="endtime" value="{$endtime}" /></td>
+				
+				<td colspan = 2>
+               	<html:btn    type="submit"/>
+               	</td>
+               </tr>
+			   
+               
+               </table>
+   
+    </FORM>
+    
+    <h1 class="text-center iconTitle">{$iconTitle}</h1>
+   
+    <div style="width: 50%" class="floatleft" id="main_data">
+			<canvas id="canvas" height="150" width="300"></canvas>
+	</div>
+	<div class="floatleft">{$icon_intro}</div>
+	
+
+	<script>
+
+	var randomScalingFactor = function(){ return Math.round(Math.random()*200)};
+
+	var barChartData = {
+		labels : [{$labels}],
+		datasets : [{$datasets}]
+	}
+	
+	<empty name="datasets">
+		$('#main_data').html('<div class="text-center">没有找到待统计数据</div>');
+	<else />
+	window.onload = function(){
+		var ctx = document.getElementById("canvas").getContext("2d");
+		window.myBar = new Chart(ctx).Bar(barChartData, {
+			responsive : true
+		});
+	}
+	</empty>
+	</script>
+    
+ </div>

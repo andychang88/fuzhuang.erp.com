@@ -1,0 +1,49 @@
+ <meta charset='utf-8'>
+<include file="./app/Home/View/header.html"  title="{$title}"  />
+       
+<a href="__URL__/add/plans_id/{$Think.get.plans_id}">添加出货记录</a>
+
+    <table>
+    
+    <tr>
+	        <th>编号</th>
+	        <th>Sku</th>
+	        
+	        <th>品牌</th>
+	        <th>颜色</th>
+	        <th>大小</th>
+	        <th>生产数量</th>
+			<th>出货数量</th>
+	        <th>出货时间</th>
+	        <th>备注</th>
+	        <th>操作</th>
+	</tr>
+	
+    <volist name="data" id="vo">
+    	
+	    <tr>
+	        <td>{$vo.id}</td>
+	        <td>{$vo.sku}</td>
+	        
+	        <td>{$vo.brand}&nbsp;&nbsp;({$vo.lang})</td>
+	        <td>{$vo.color}</td>
+	        <td>{$vo.size}</td>
+	        <td>{$vo.stock_amount}</td>
+			<td>{$vo.amount_ready}</td>
+	        <td>{$vo.add_time|date="Y-m-d",###}</td>
+	        <td>{$vo.memo}</td>
+	        <td><a href="__URL__/edit/id/{$vo.id}/plans_id/{$vo.plans_id}">编辑</a> <a onclick="return confirm('确认要删除吗？');"  href="__URL__/delete/id/{$vo.id}">删除</a>
+	        
+	       
+	       
+	        </td>
+	    </tr>
+	  
+    </volist>
+    
+    <tr><td class="pager" colspan=20><div class="viciao">{$page}</div></td></tr>
+    </table>
+    
+    
+     </body>
+    </html>

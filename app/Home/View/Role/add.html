@@ -1,0 +1,52 @@
+
+
+<div class='container mw-800px'>
+
+ 
+ 
+  <div id='titlebar'>
+    <div class='heading'>
+      <span class='prefix' title='USER'><empty name = "vo[id]">添加角色<else />编辑角色</empty></span>
+    </div>
+  </div>	
+	
+     <FORM method="post" id="frm"  class="form-condensed"  onsubmit="return checkForm();" action="__URL__/add">
+     
+	     <notempty name="role.id"><input type="hidden" name="id" value="{$role.id}" /></notempty>
+	     
+	     <table align='center' class='table table-form'>
+	     
+	     <tr>
+	     	<th >角色名：</th><td><input type="text" name="name" id="name" value="{$role.name}" /></td>
+	     </tr>
+	     
+	     <tr>
+	     	<th >备注：</th><td><textarea name="remark" cols="50" rows="3">{$role.remark}</textarea></td>
+	     </tr>
+	     
+	     <tr>
+	     	<td colspan = 2  class='text-center'>
+	     		<button type='submit' id='submit' class='btn btn-submit btn-primary'>保存</button>
+               	<button type='reset' id='reset' class='btn btn-reset '>重置</button>
+	     	</td>
+	     </tr>
+     </table>
+    <script language="javascript">
+	function checkForm(){
+		var val = $.trim($('#name').val());
+		if(val.length == 0){
+			alert('请输入角色名');
+			return false;
+		}
+		
+		return true;
+	}
+	
+		
+	</script>
+    </FORM>
+    
+    
+</div>
+
+

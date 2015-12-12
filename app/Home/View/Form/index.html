@@ -1,0 +1,27 @@
+
+<include file="./app/Home/View/header.html"  title="{$title}"  />
+       
+<a href="__URL__/add">add</a>
+    <table>
+    <tr>
+	        <td>id</td>
+	        <td>title</td>
+	        <td>content</td>
+	        <td>action</td>
+	</tr>
+    <volist name="data" id="vo">
+    	
+	    <tr>
+	        <td>{$vo.id}</td>
+	        <td>{$vo.title}</td>
+	        <td>{$vo.content}</td>
+	        <td><a href="__URL__/edit/id/{$vo.id}">edit</a> <a href="__URL__/delete/id/{$vo.id}">delete</a></td>
+	    </tr>
+	  
+    </volist>
+    
+    </table>
+    
+    
+     </body>
+    </html>

@@ -1,0 +1,118 @@
+
+<div class="main">
+
+
+<notempty name="msgtip"><h2>{$msgtip}</h2></notempty>
+
+
+<button id="addModule" class="btn btn-primary affix">添加模块</button>
+<br><br>
+
+<table class='table table-condensed table-hover table-striped tablesorter table-fixed' id='userList'>
+    <thead>
+    <tr class='colhead'>
+    		<th>编号</th>
+	        <th>模块名</th>
+	        <th>Controller</th>
+			<th>Action</th>
+			<th>关键词</th>
+			<th>关键词值</th>
+	        <th>排序</th>
+	        <th>添加时间</th>
+	        <th>操作</th>
+	          </tr>
+    </thead>
+    <tbody>
+    
+     <volist name="allModules" id="module">
+    	
+    	<tr><td class="with-padding" style="background:#eee;" colspan=9 >{$module.name} &nbsp;&nbsp;</td></tr>
+    	
+    	<volist name="module.methodes" id="vo">
+	    <tr class='text-center'>
+	        <td>{$vo.id}</td>
+	        <td>{$vo.name}</td>
+			<td>{$vo.controller_name}</td>
+			<td>{$vo.method_name}</td>
+			<td>{$vo.keyword1}</td>
+			<td>{$vo.keyword1_val}</td>
+			<td>{$vo.sort}</td>
+	        <td>{$vo.add_time}</td>
+			<td><a href="javascript:loadMoudle({$vo.id})" >编辑</a>
+			<a href="__URL__/deleteModule/id/{$vo.id}" >删除</a>
+			</td>
+	    </tr>
+	   </volist>
+	   
+    </volist>
+	
+	 </tbody>
+     
+     <tfoot>
+     <tr>
+      <td colspan='9'  class="pager" >
+	      <div class='table-actions clearfix viciao'>
+	      	{$page}
+	      </div>
+      </td>
+    </tr>
+     
+     </tfoot>
+     
+</table>
+</div>        
+	        
+
+<script>
+$(function(){
+	$('#addModule').click(function(){
+		loadMoudle(0);
+	});
+	
+});
+function loadMoudle(id) {
+	var url = '__URL__/getModule/id/' + id;
+	$.get(url,{},function(data){
+		$('#modal-body').html(data);
+
+		$('#myModal').modal(
+				{
+				    keyboard : false,
+				    show     : true
+		})
+				
+	},'html');
+}
+</script>
+
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog " style="width:1100px">
+    <div class="modal-content">
+     
+     
+     <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">关闭</span></button>
+      <h4 class="modal-title">编辑模块</h4>
+    </div>
+    <div id="modal-body" class="modal-body">
+      
+    </div>
+    <div class="modal-footer">
+      
+      
+    </div>
+    
+    
+    </div>
+  </div>
+</div>
+
+	        
+	        
+	        
+	        
+    
+    
+    
+   

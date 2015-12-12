@@ -1,0 +1,76 @@
+
+
+<include file="./app/Home/View/Soldrecords/search.html" search_status="search_status" retailer_products_status_selected="retailer_products_status_selected" />
+
+<table class='table table-condensed table-hover table-striped tablesorter table-fixed' >
+<br>
+    <thead>
+    <tr>
+	        <th class="w-orderno">单号</th>
+	        <th>Sku</th>
+	        <th class="w-img">图片</th>
+	        <th>品牌</th>
+	        <th>颜色</th>
+	        <th class="w-size">售出数量</th>
+	        <th>售出时间</th>
+	        <th>备注</th>
+	        <th>操作</th>
+	</tr>
+	</thead>
+	
+	
+	
+    <volist name="data" id="vo">
+    	
+	    <tr  class='text-center' >
+	        <td>{$vo.orderno}</td>
+	        <td>{$vo.sku}</td>
+	        <td>
+	        <empty name="vo.photo"> 
+	        	{$vo.title} 
+	        <else />
+	        
+	        <a  rel="group"  id="{$vo.sku}-{$vo.id}" href="__PUBLIC__/{$vo.photo}">
+	        <img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.photo}" alt="{$vo.title}"  title="{$vo.title}" />
+	        </a>
+
+	        </empty>
+	        </td>
+	        <td>{$vo.brand}</td>
+	        <td>{$vo.color}</td>
+	        
+	        <td>
+	        
+	        		<table  class=" w-350px table-bordered" id="tbl2"  align="center" >
+	        			<tr>
+						<th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th>
+						</tr>
+							<tr>
+							<td>{$vo.num_xs}</td>
+							<td>{$vo.num_s}</td>
+							<td>{$vo.num_m}</td>
+							<td>{$vo.num_l}</td>
+							<td>{$vo.num_xl}</td>
+							<td>{$vo.num_xxl}</td>
+							</tr>
+					   </table>
+					   
+	        </td>
+	        <td>{$vo.add_time|format_time}</td>
+	        <td>{$vo.memo}</td>
+	        <td><a href="__URL__/edit/id/{$vo.id}">编辑</a> <a href="__URL__/delete/id/{$vo.id}">删除</a></td>
+	    </tr>
+	  
+    </volist>
+    <tr><td class="pager" colspan=9><div class="viciao">{$page}</div></td></tr>
+    
+    <empty name="data">
+	<tr><td style="text-align:center;" colspan=9><div class="viciao">尚无数据</div></td></tr>
+	</empty>
+	
+	
+    </table>
+    
+    
+     </body>
+    </html>

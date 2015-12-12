@@ -1,0 +1,85 @@
+
+
+<div class="main">
+
+<include file="./app/Home/View/Retailerapply/search.html" />
+<br>
+
+<table class='table table-condensed table-hover table-striped tablesorter table-fixed' >
+    <thead>
+    <tr class='colhead'>
+	        <th>编号</th>
+	        <th>Sku</th>
+	        <th>产品图片</th>
+	        <th>品牌</th>
+	        <th>颜色</th>
+	        <th>大小</th>
+	        <th>类型</th>
+	        <th>预订数量</th>
+	        <th>申请人</th>
+	        <th>添加时间</th>
+	        <th>状态</th>
+	        <th>备注</th>
+	        <th class="w-300px">操作</th>
+	</tr>
+	</thead>
+	<empty name="data">
+	 <tr><td  class='text-center'  colspan=13>没有数据</td></tr>
+	</empty>
+	
+    <volist name="data" id="vo">
+    	
+	    <tr  class='text-center' >
+	        <td>{$vo.id}</td>
+	        <td>{$vo.sku}</td>
+	        <td>
+	        
+	        <empty name="vo.photo"> 
+	        	{$vo.title} 
+	        <else />
+	        
+	        <a  rel="group"  id="{$vo.sku}-{$vo.id}" href="__PUBLIC__/{$vo.photo}">
+	        <img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.photo}" alt="{$vo.title}"  title="{$vo.title}" />
+	        </a>
+	        </empty>
+	        
+	        </td>
+	        <td>{$vo.brand}</td>
+	        <td>{$vo.color}</td>
+	        <td>{$vo.size}</td>
+	        <td><if condition="$vo.type eq 1"> 预订 <else /> 退订 </if> </td>
+	        <td>{$vo.stock_total}</td>
+	        <td>{$vo.apply_user}</td>
+	        <td>{$vo.add_time|date="Y-m-d",###}</td>
+	        <td>{$vo.audit_status}</td>
+	        <td>{$vo.memo}</td>
+	        <td>
+	        
+	        <if condition="$vo.is_audit eq 1 or $vo.is_audit eq 0">
+	        	<a href="__URL__/add/id/{$vo.id}">编辑</a> 
+	        </if>
+	        
+	        <if condition="$vo.is_audit eq 0">
+	        	<a href="__URL__/auditSubmit/id/{$vo.id}">提交审核</a>
+	        <elseif condition="$vo.is_audit eq 1"/>
+	        	<a href="__URL__/auditCancel/id/{$vo.id}">撤回</a>
+				
+	        	<a href="__URL__/auditResultOk/id/{$vo.id}">审核通过</a>
+	        	<a href="__URL__/auditResultReset/id/{$vo.id}">审核驳回</a>
+				
+				
+	        <elseif condition="$vo.is_audit eq 2"/>
+	        	审核已通过
+	        <elseif condition="$vo.is_audit eq 3"/>
+	        	审核已驳回
+	        </if>
+	       
+	        </td>
+	    </tr>
+	  
+    </volist>
+    
+    <tr><td class="pager" colspan=13><div class="viciao">{$page}</div></td></tr>
+    </table>
+  </div>  
+    

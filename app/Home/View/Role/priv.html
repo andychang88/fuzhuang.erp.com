@@ -1,0 +1,89 @@
+ <meta charset='utf-8'>
+<include file="./app/Home/View/header.html"  title="{$title}"  />
+       
+
+<include file="./app/Home/View/Role/nav.html"   />
+
+
+
+
+<style type="text/css">
+.group-item{display:block;float:left;width:120px;}
+</style>
+
+<script>
+function selectAll(checker, scope, type)
+{ 
+    if(scope)
+    {
+        if(type == 'button')
+        {
+            $('#' + scope + ' input').each(function() 
+            {
+                $(this).attr("checked", true)
+            });
+        }
+        else if(type == 'checkbox')
+        {
+            $('#' + scope + ' input').each(function() 
+            {
+                $(this).attr("checked", checker.checked)
+            });
+         }
+    }
+    else
+    {
+        if(type == 'button')
+        {
+            $('input:checkbox').each(function() 
+            {
+                $(this).attr("checked", true)
+            });
+        }
+        else if(type == 'checkbox')
+        { 
+            $('input:checkbox').each(function() 
+            {
+                $(this).attr("checked", checker.checked)
+            });
+        }
+    }
+}
+</script>
+
+
+<FORM method="post" id="frm"  action="__URL__/priv">
+<input type="hidden" name="role_id" value="{$role_id}" />
+
+    <table>
+    <tr><th>模块名</th><th>操作</th></tr>
+
+    <volist name="allModules" id="module">
+    	
+	    <tr>
+	        <td><input type="checkbox" onclick='selectAll(this, "{$module.controller_name}", "checkbox")' name="allchecker[]" />
+	        {$module.name}</td>
+	        <td id="{$module.controller_name}">
+	        	<volist name="module.methodes" id="method">
+	        		<span class="group-item"><input type="checkbox" <if condition="$method.selected eq 1" >checked</if> onclick='selectAll(this, "index", "checkbox")' name="methodes[{$module.controller_name}][]" value='{$method.id}' />
+	        		{$method.name}</span>
+	        	</volist>
+	        </td>
+	    </tr>
+	  
+    </volist>
+    
+    
+    
+    <tr>
+    	<td style="text-align:center;padding:15px 0px;" colspan = 2>
+    	<INPUT type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;
+    	<INPUT type="reset" value="重置">
+    	</td>
+    </tr>
+	     
+    </table>
+    </FORM>
+    
+     </body>
+    </html>

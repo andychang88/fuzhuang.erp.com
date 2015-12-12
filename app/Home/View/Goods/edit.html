@@ -1,0 +1,76 @@
+<meta charset='utf-8'><include file="./app/Home/View/header.html"  title="{$title}"  />
+    
+ 
+
+     <a href="__URL__/index">返回产品列表</a>
+     
+               <FORM   method="post"  action="__URL__/insertGood"   enctype="multipart/form-data" >
+               
+               <table>
+               
+               <tr>
+				       <td class="right">Sku</td> <td><input type="text" name="sku" value="{$vo.sku}" /></td>
+			   </tr>
+
+			    <tr>
+				       <td class="right">明细</td> <td>
+					  <table>
+							<tr>
+							<td class="center">品牌</td>
+							<td class="center">语言</td>
+							<td class="center">颜色</td>
+							
+							<td>XS</td><td>S</td><td>M</td><td>L</td><td>XL</td><td>XXL</td>
+							<td class="center">备注</td>
+							<td>操作</td>
+							
+							</tr>
+							
+							<empty name="vo.plans_attr">
+								<include file="./app/Home/View/goods_dimention.html"    />
+							</empty>
+
+							<volist name="vo.plans_attr" id="attr" key="row_index">
+							
+								<include file="./app/Home/View/goods_dimention.html" attr="attr" key="row_index"    />
+								
+							</volist>					   
+
+
+
+							<tr id="trTotal"><td class="center"  colspan=10></td></tr>
+					   </table>
+
+
+					   
+					   </td>
+			   </tr>	
+
+			  
+			   <tr>
+				       <td class="right">产品描述</td> <td><input type="text" name="title" value="{$vo.title}" /></td>
+			   </tr>
+			  
+			  
+			   <tr>
+				       <td class="right">产品图片</td> <td><input type="file" name="photo" /></td>
+			   </tr>
+			   
+			   <tr>
+				       <td class="right">备注</td> <td><textarea name="memo" cols="50" rows="3">{$vo.memo}</textarea></td>
+			   </tr>
+			   		
+               <tr>
+               	<td  class="center padding20" colspan = 2>
+				<INPUT type="hidden" name="id" value="{$vo.id}">
+               	<INPUT type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;
+               	<INPUT type="reset" value="重置">
+               	</td>
+               </tr>
+               
+               </table>
+    
+    </FORM>
+
+     </body>
+    </html>

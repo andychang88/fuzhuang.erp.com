@@ -1,0 +1,108 @@
+<div class='container mw-900px'>
+ 
+  <div id='titlebar'>
+    <div class='heading'>
+      <span class='prefix' title='USER'><empty name = "vo[id]">添加预定退订产品<else />编辑预定退订产品</empty></span>
+    </div>
+  </div>	
+    
+     
+     
+               <FORM method="post" class="form-condensed"  action="__URL__/add"  enctype="multipart/form-data" >
+               <INPUT type="hidden" name="id" value="{$vo.id}">
+               <INPUT type="hidden" name="is_audit" id="is_audit" value="0">
+               <table class='table table-form'>
+               
+               <tr>
+				       <th>Sku：</th> <td><input type="text" name="sku" value="{$vo.sku}" /></td>
+			   </tr>	
+			   <tr>
+				       <th>品牌：</th> <td>
+				       <html:select name="brand" options="brand"   selected='vo[brand]'  first="请选择品牌" />
+				       </td>
+			   </tr>	
+			   <tr>
+				       <th>产品描述：</th> <td><input type="text" name="title" value="{$vo.title}" /></td>
+			   </tr>
+			   <tr>
+				       <th>颜色：</th> <td><input type="text" name="color" value="{$vo.color}" /></td>
+			   </tr>
+			   <tr>
+				       <th>大小：</th> <td>
+				       <input type="radio" name="size" <if condition="$vo.size eq 'XXL' ">checked</if>  value="XXL" />XXL&nbsp;&nbsp;
+				       <input type="radio" name="size"  <if condition="$vo.size eq 'XL' ">checked</if>  value="XL" />XL&nbsp;&nbsp;
+				       <input type="radio" name="size"  <if condition="$vo.size eq 'L' ">checked</if>  value="L" />L&nbsp;&nbsp;
+				       <input type="radio" name="size"  <if condition="$vo.size eq 'M' ">checked</if>  value="M" />M&nbsp;&nbsp;
+				       <input type="radio" name="size"  <if condition="$vo.size eq 'S' ">checked</if>  value="S" />S&nbsp;&nbsp;
+				       <input type="radio" name="size"  <if condition="$vo.size eq 'XS' ">checked</if>  value="XS" />XS&nbsp;&nbsp;
+			
+				       
+				       </td>
+			   </tr>
+			   
+			   <tr>
+				       <th>类型：</th> <td>
+				       
+				        <select  id="reserve_type" name="type">
+				       	<option <if condition="$vo.type eq 1">selected</if> value="1">预订</option>
+				       	<option  <if condition="$vo.type eq 2">selected</if> value="2">退订</option>
+				        </select>
+				       
+				       </td>
+			   </tr>
+			   
+			   <tr>
+				       <th><span id="reserve_tip">预订数量：</span></th> <td><input type="text" name="stock_total" value="{$vo.stock_total}" /></td>
+			   </tr>
+			  
+			   <tr>
+				       <th>产品图片：</td> <th><input type="file" name="photo" />
+				       <notempty name="vo.photo"> 
+					        <a href="__PUBLIC__/{$vo.photo}" data-lightbox="{$vo.sku}-{$vo.id}" data-title="{$vo.title}">
+					        <img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.photo}" alt="{$vo.title}" />
+					        </a>
+				        </notempty>
+				       </td>
+			   </tr>
+			   
+			   <tr>
+				       <th>备注：</th> <td><textarea name="memo" cols="50" rows="3">{$vo.memo}</textarea></td>
+			   </tr>
+			   		
+               <tr>
+               	<td  class="text-center" colspan = 2>
+               	
+               		<button type='submit' id='submit' onclick="changeAuditStatus(1)" class='btn btn-submit btn-primary'>提交审核</button>
+               		<button type='submit' id='submit2'  onclick="changeAuditStatus(0)"  class='btn btn-submit btn-primary'>保存为草稿</button>
+               		<button type='reset' id='reset' class='btn btn-reset '>重置</button>
+               	</td>
+               </tr>
+               
+               </table>
+    
+    </FORM>
+</div>    
+
+    <script language="javascript">
+    function changeAuditStatus(status) {
+		$('#is_audit').val(status);
+    }
+    
+    $(function(){
+		$('#reserve_type').change(function(){
+			var val = $(this).val();
+			var html = val == 1?'预订数量':'退订数量';
+			$('#reserve_tip').html(html);
+			
+		});
+    })
+    </script>
+   
+   
+   
+   
+   
+   
+   
+   
+   

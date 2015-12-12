@@ -1,0 +1,92 @@
+<div class="main">
+
+ 
+<include file="Goods:search_allo_detail" />
+<br>
+
+    <table class='table table-condensed table-hover table-striped tablesorter table-fixed' >
+    <thead>
+    
+    <tr>
+	        <th class="w-orderno">产品单号</th>
+			<th>Sku</th>
+	       	<th class="w-photo">产品图片</th>
+	        <th class="w-size">明细</th>
+			<th>供应商</th>
+			<th class="w-time">分配<br>时间</th>
+	        <th>单价</th>
+			<th>状态</th>
+	</tr>
+	</thead>
+    <volist name="data" id="vo">
+    	
+	   <tr  class='text-center' >
+	        <td><notempty name="vo.orderno"> {$vo.orderno}<else /> {$vo.id}</notempty></td>
+			<td>{$vo.sku}</td>
+	        <td>
+			<empty name="vo.photo"> 
+	        	{$vo.title} 
+	        <else />
+	        
+	        <a  rel="group"  id="{$vo.sku}-{$vo.id}" href="__PUBLIC__/{$vo.photo}">
+	        <img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.photo}" alt="{$vo.title}"  title="{$vo.title}" />
+	        </a>
+
+	        </empty>
+			</td>
+			<td>
+			
+				<table  class=" w-350px table-bordered" id="tbl2"  align="center" >
+						<notempty name="vo.plans_attr">
+							<tr>
+							<th class="center">品牌</th>
+							<th class="center">语言</th>
+							<th class="center">颜色</th>
+							<th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th>
+							<th class="center">备注</th>
+							</tr>
+						</notempty>
+						<volist name="vo.plans_attr" id="attr">
+							<tr>
+							<td>{$attr.brand}</td>
+							<td>{$attr.lang}</td>
+							<td>{$attr.color}</td>
+							<td>{$attr.num_xs}</td>
+							<td>{$attr.num_s}</td>
+							<td>{$attr.num_m}</td>
+							<td>{$attr.num_l}</td>
+							<td>{$attr.num_xl}</td>
+							<td>{$attr.num_xxl}</td>
+
+								
+								 
+							<td>{$attr.memo_attr}</td>
+							
+							</tr>
+					   </volist>
+
+							
+					   </table>
+			
+			
+			</td>
+			<td>{$vo.retailer_name}</td>
+	       <td>{$vo.add_time|format_time}</td>
+	       <td>{$vo.price}</td>
+		  
+		   <td>{$vo.bill_status_name}</td>
+	       
+	    </tr>
+	  
+    </volist>
+    <tr><td class="pager" colspan=8><div class="viciao">{$page_html}</div></td></tr>
+	
+	<empty name="data">
+	<tr><td style="text-align:center;" colspan=8><div class="viciao">尚无数据</div></td></tr>
+	</empty>
+	
+	
+    </table>
+    
+    
+ </div>

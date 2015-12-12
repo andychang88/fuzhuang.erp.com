@@ -1,0 +1,143 @@
+<div class="main">
+<table class='table table-condensed table-hover table-striped tablesorter table-fixed' >
+   <thead>
+    <tr class='colhead'>
+	        <th>单号</th>
+	        <th>Sku</th>
+	        <th class="w-100px">产品图片</th>
+	        <th class="w-400px">明细</th>
+	    
+			<th>成本</th>
+	        <th>创建时间<br>出货时间</th>
+	      
+			<th>创建人</th>
+			
+	        <th>备注</th>
+			<th>状态</th>
+	        <th>操作</th>
+	</tr>
+	</thead>
+	
+	<tbody>
+    <volist name="data" id="vo" key="kk" >
+    	
+	    <tr  class='text-center' <if condition="($kk % 2) eq 1">class="altrow" </if> >
+	        <td>{$vo.orderno}</td>
+	        <td>{$vo.sku}</td>
+	        <td>
+	        
+	        <empty name="vo.photo"> 
+	        	{$vo.title} 
+	        <else />
+	        
+	        <a  rel="group"  id="{$vo.sku}-{$vo.id}" href="__PUBLIC__/{$vo.photo}">
+	        <img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.photo}" alt="{$vo.title}"  title="{$vo.title}" />
+	        </a>
+	        </empty>
+	        
+	        </td>
+	        <td>
+			
+			
+						<table class=" w-350px table-bordered" id="tbl2"  align="center" >
+						<notempty name="vo.plans_attr">
+							<tr>
+							<th class="center">品牌</th>
+							<th class="center">语言</th>
+							<th class="center">颜色</th>
+							<th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th>
+							<th class="center">备注</th>
+							</tr>
+						</notempty>
+						<volist name="vo.plans_attr" id="attr">
+							<tr>
+							<td>{$attr.brand}</td>
+							<td>{$attr.lang}</td>
+							<td>{$attr.color}</td>
+							<td>{$attr.num_xs}</td>
+							<td>{$attr.num_s}</td>
+							<td>{$attr.num_m}</td>
+							<td>{$attr.num_l}</td>
+							<td>{$attr.num_xl}</td>
+							<td>{$attr.num_xxl}</td>
+								 
+							<td>{$attr.memo_attr}</td>
+							
+							
+							</tr>
+					   </volist>
+
+							
+					   </table>
+			
+			
+			</td>
+	       
+	        
+			
+			<td>{$vo.total_cost}</td>
+	        <td>{$vo.add_time|date="Y-m-d",###}<br>{$vo.produce_time|date="Y-m-d",###}</td>
+	       
+			<td>{$vo.user_name}</td>
+	        <td>{$vo.memo}</td>
+			<td>
+			<if condition="$vo.is_audit eq 0">草稿</if>
+			<if condition="$vo.is_audit eq 1">生产审核中</if>
+			<if condition="$vo.is_audit eq 2">生产中</if>
+			<if condition="$vo.is_audit eq 3">生产审核驳回</if>
+			<if condition="$vo.is_audit eq 4">生产完成</if>
+			<if condition="$vo.is_audit eq 5">产品单</if>
+			<if condition="$vo.is_audit eq 6">财务审核中</if>
+			<if condition="$vo.is_audit eq 7">采购中</if>
+
+			</td>
+
+	        <td>
+			
+	        
+	        <if condition="$vo.is_audit eq 0">
+				<a href="__URL__/add/id/{$vo.id}">编辑</a> 
+				<a onclick="return confirm('确认要删除吗？');"  href="__URL__/delete/id/{$vo.id}">删除</a><br>
+	        	<a href="__URL__/audit/id/{$vo.id}/type/6">提交财务审核</a>
+			<elseif condition="$vo.is_audit eq 6"/>
+			
+				<a href="__URL__/audit/id/{$vo.id}/type/0">撤回</a>
+	        	<if condition="($Think.session.is_admin eq 1) "> 
+	        	<br><a href="__URL__/audit/id/{$vo.id}/type/2">财务审核通过</a><br>
+	        	<a href="__URL__/audit/id/{$vo.id}/type/3">财务审核驳回</a>
+				</if>
+			
+	        <elseif condition="$vo.is_audit eq 2"/>
+				<a href="__MODULE__/planshistory/index/plans_id/{$vo.id}">出货记录</a>
+				<br><a href="__URL__/audit/id/{$vo.id}/type/4">生产完成</a>
+	        <elseif condition="$vo.is_audit eq 3"/>
+	        	审核已驳回
+			<elseif condition="$vo.is_audit eq 4"/>
+				<a href="__URL__/plan_to_product/plans_id/{$vo.id}">生产入库</a>
+			<elseif condition="$vo.is_audit eq 5"/>
+				无
+			<elseif condition="$vo.is_audit eq 7"/>
+				<a href="__URL__/audit/id/{$vo.id}/type/0">撤回</a>
+	        	<a href="__URL__/audit/id/{$vo.id}/type/4">生产完成</a>
+	        <elseif condition="$vo.is_audit eq 1"/>
+	        	<a href="__URL__/audit/id/{$vo.id}/type/0">撤回</a>
+
+				<if condition="($Think.session.is_admin eq 1) "> 
+	        	<br><a href="__URL__/audit/id/{$vo.id}/type/2">生产审核通过</a><br>
+	        	<a href="__URL__/audit/id/{$vo.id}/type/3">生产审核驳回</a>
+				</if>
+			
+	        </if>
+	       
+	        </td>
+	    </tr>
+	  
+    </volist>
+    
+    </tbody>
+    
+    
+    <tfoot><tr><td class="pager" colspan=10><div class="viciao">{$page}</div></td></tr></tfoot>
+    </table>
+    
+    </div>

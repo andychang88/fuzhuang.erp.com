@@ -1,0 +1,63 @@
+<div class="main">
+<table class='table table-condensed table-hover table-striped tablesorter table-fixed' >
+   <thead>
+    <tr class='colhead'>
+	        <th class="w-no">编号</th>
+	        <th class="w-100px">品牌</th>
+	        <th class="w-100px">语言</th>
+			<th class="w-100px">颜色</th>
+			<th>产销存数量</th>
+	        
+	</tr>
+	</thead>
+	
+	<tbody>
+    <volist name="data" id="vo" >
+    	
+	    <tr  class='text-center' >
+	        <td>{$vo.id}</td>
+	        <td>{$vo.brand}</td>
+	        <td>{$vo.lang}</td>
+	        <td>{$vo.color}</td>
+	        <td>
+	        
+			<table align="center" id="tbl2" class=" w-500px table-bordered">
+			<tr><td>型号</td>
+			<td>库存总数</td><td>在产总数</td><td>共分配</td><td>共售出</td><td>3天均售出</td><td>7天均售出</td><td>15天均售出</td>
+			<td>分销商剩余库存数</td><td>总部剩余库存数</td>
+			</tr>
+			
+			<volist name="vo[sold_info]" id="so" key="tmp_size">
+			
+			<tr><td>{$key}</td>
+			<td>{$so.totalNumberInStock}</td><td>{$so.totalNumberInProduction}</td>
+			<td>{$so.totalAllo}</td><td>{$so.totalSold}</td>
+			<td>{$so.sale3days}</td><td>{$so.sale7days}</td><td>{$so.sale15days}</td>
+			<td>{$so.remainedOfRetailer}</td>
+			
+			<td>
+			<if condition="so.isAlert eq 1" >
+				<span style="color:red;font-weight:bold;">{$so.remainedOfStock}</span>
+			<else />
+				{$so.remainedOfStock}
+			</if>
+			
+			</td>
+			</tr>
+			
+			</volist>
+			
+			</table>
+	       
+	        </td>
+	    </tr>
+	  
+    </volist>
+    
+    </tbody>
+    
+    
+    <tfoot><tr><td class="pager" colspan=5><div class="viciao">{$page}</div></td></tr></tfoot>
+    </table>
+    
+    </div>

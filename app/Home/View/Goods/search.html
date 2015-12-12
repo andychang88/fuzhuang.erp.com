@@ -1,0 +1,36 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+               <FORM method="get" id="search_frm" onsubmit="return checkSearchfrm();" action="__ACTION__">
+               <table class="search_table">
+               
+               <tr>
+               	<td>单号</td>
+				<td><input type="text" name="orderno" value="{$Think.get.orderno}" />
+				</td>
+				<td colspan = 2>
+               	<INPUT type="submit" value="查找">&nbsp;&nbsp;
+               	
+               	</td>
+               </tr>
+			   
+               
+               </table>
+    <script language="javascript">
+	$(function(){
+		var status = '{$Think.post.status}';
+		var retailer_id = '{$Think.post.retailer_id}';
+		if(status.length>0){
+			$('#status').val(status);
+		}
+		if(retailer_id.length>0){
+			$('#retailer_id').val(retailer_id);
+		}
+
+	});
+
+	function checkSearchfrm(){
+				return true;
+	}
+	
+		
+	</script>
+    </FORM>

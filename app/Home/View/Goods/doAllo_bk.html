@@ -1,0 +1,166 @@
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<include file="./app/Home/View/header.html"  title="{$title}"  />
+     
+    
+     <a href="__URL__/index">返回产品列表</a>
+     <h1>分配产品给分销商</h1>
+               
+               <table>
+               
+               <tr>
+				       <td>产品</td> <td>{$vo.title}--({$vo.sku})
+				      
+				       </td>
+			   </tr>	
+			   <tr>
+				       <td>分销商</td> <td>
+				       <html:select  id="retailer_id_org" name="retailer_id" options="retailers" first="请选择分销商" selected=""/> 
+				      
+				       </td>
+			   </tr>
+			   <tr>
+				       <td>价格</td> <td>
+				      <INPUT type="text"  id="price_org" name="price" value="">
+				      
+				       </td>
+			   </tr>
+			   
+
+
+
+			    <tr>
+				       <td class="right">明细</td> <td>
+<FORM method="post" style="display:none;"  id="frm" action="__URL__/doAlloInsert"   >
+
+ </FORM>
+					   <table class="tbl2">
+							<tr>
+							<th class="center">品牌</th>
+							<th class="center">语言</th>
+							<th class="center">颜色</th>
+							<th>XS分配数</th><th>S分配数</th><th>M分配数</th><th>L分配数</th><th>XL分配数</th><th>XXL分配数</th>
+							<th class="center">备注</th>
+							<th>操作</th>
+							
+							</tr>
+
+							
+
+
+<volist name="vo.plans_attr" id="attr" key="kk">
+
+  
+
+							<tr  <if condition="$kk eq 1"> id="rowBase" </if> >
+							<td>{$attr.brand}
+							<INPUT type="hidden" name="attr_id" value="{$attr.id}">
+							 <INPUT type="hidden" name="goods_id" value="{$vo.id}">
+							<INPUT type="hidden" name="retailer_id" value="">
+							<INPUT type="hidden" name="price" value="">
+
+							</td>
+							<td>
+							{$attr.lang}
+							</td>
+							<td>{$attr.color}</td>
+							
+								<td>
+								 <gt name="attr.num_xs" value="$attr.num_xs_ready">
+								<input type="text" class="inputw20" name="amount_ready[xs][]" value="" /><br>
+								</gt>
+								 (已{$attr.num_xs_ready}/共{$attr.num_xs|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_s" value="$attr.num_s_ready">
+								<input type="text" class="inputw20" name="amount_ready[s][]" value="" /><br>
+								</gt>
+								(已{$attr.num_s_ready}/共{$attr.num_s|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_m" value="$attr.num_m_ready">
+								<input type="text" class="inputw20" name="amount_ready[m][]" value="" /><br>
+								</gt>
+								(已{$attr.num_m_ready}/共{$attr.num_m|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_l" value="$attr.num_l_ready">
+								<input type="text" class="inputw20" name="amount_ready[l][]" value="" /><br>
+								 
+								</gt>
+								(已{$attr.num_l_ready}/共{$attr.num_l|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_xl" value="$attr.num_xl_ready">
+								<input type="text" class="inputw20" name="amount_ready[xl][]" value="" /><br>
+								 
+								</gt>
+								(已{$attr.num_xl_ready}/共{$attr.num_xl|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_xxl" value="$attr.num_xxl_ready">
+								<input type="text" class="inputw20" name="amount_ready[xxl][]" value="" /><br>
+								 
+								</gt>
+								(已{$attr.num_xxl_ready}/共{$attr.num_xxl|intval})
+								</td>
+
+								 
+							<td><textarea name="memo" cols="10" rows="3"></textarea></td>
+							<td>
+							 <input type="submit" onclick="return addAllo(this)"  value="添加分配" />
+							</td>
+							</tr>
+   
+</volist>		
+
+
+
+
+					   </table>
+
+					   </td>
+			   </tr>	
+
+
+
+
+			   		
+               <tr>
+               	<td class="center" colspan = 2>
+               	 
+               	<INPUT type="reset" value="分配">
+               	<INPUT type="reset" value="重置">
+               	</td>
+               </tr>
+               
+               
+               
+               </table>
+   <script language="javascript">
+
+function addAllo(obj){
+	
+	
+	var tr = $(obj).parents('tr:first');
+
+	var rid = $('#retailer_id_org').val();
+	var rprice = $('#price_org').val();
+
+	tr.find('input[name=retailer_id]').val(rid);
+	tr.find('input[name=price]').val(rprice);
+
+	$('#frm').find('input').remove();
+
+	tr.find('input').each(function(){
+		
+		$('#frm').append($(this).clone());
+	});
+	$('#frm').submit();
+	return false;
+}
+   </script>
+    
+     </body>
+    </html>

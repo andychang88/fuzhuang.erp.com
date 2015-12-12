@@ -1,0 +1,77 @@
+<div class='container mw-900px'>
+ 
+  <div id='titlebar'>
+    <div class='heading'>
+      <span class='prefix' title='USER'><empty name = "vo[id]">新建计划单<else />编辑计划单</empty></span>
+    </div>
+  </div>	
+  
+               <FORM method="post" class="form-condensed"   action="__URL__/add"  enctype="multipart/form-data" >
+               <INPUT type="hidden" name="id" value="{$vo.id}">
+               <table align='center' class='table table-form'>
+               
+               <tr>
+				       <th class="right">Sku：</th> <td><input type="text" name="sku" value="{$vo.sku}" /></td>
+			   </tr>
+
+			    <tr>
+				       <th class="right">明细：</th> <td>
+					  <table id="tbl2">
+							<tr>
+							<th>品牌</th>
+							<th>语言</th>
+							<th>颜色</th>
+							
+							<th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th>
+							<th class="text-center" >备注</th>
+							<th>操作</th>
+							
+							</tr>
+							
+							<empty name="vo.plans_attr">
+								<include file="./app/Home/View/goods_dimention.html"    />
+							</empty>
+							
+							<volist name="vo.plans_attr" id="attr" key="row_index">
+								<include file="./app/Home/View/goods_dimention.html" attr="attr" key="row_index"    />
+							</volist>					   
+
+							<tr id="trTotal"><td class="center"  colspan=10></td></tr>
+					   </table>
+
+					   </td>
+			   </tr>	
+
+			  
+			   <tr>
+				       <th class="right">产品描述：</th> <td><input type="text" name="title" value="{$vo.title}" /></td>
+			   </tr>
+			  
+			   <tr>
+				       <th class="right">预计成本：</th> <td><input type="text" name="total_cost" value="{$vo.total_cost}" /></td>
+			   </tr>
+			   <tr>
+				       <th class="right">预计出货日期：</th> <td>
+				       <input name="produce_time" id="ebayTestStart"  value="{$vo.produce_time|format_time}"  type="text" class="form-date"  />
+				       </td>
+			   </tr>
+			   <tr>
+				       <th class="right">产品图片：</th> <td><input type="file" name="photo" /></td>
+			   </tr>
+			   
+			   <tr>
+				       <th class="right">备注：</th> <td><textarea name="memo" cols="50" rows="3">{$vo.memo}</textarea></td>
+			   </tr>
+			   		
+               <tr>
+               	<td  class="text-center" colspan = 2>
+               	<button type='submit' id='submit' class='btn btn-submit btn-primary'>保存</button>
+               	<button type='reset' id='reset' class='btn btn-reset '>重置</button>
+               	
+               	</td>
+               </tr>
+               
+               </table>
+    
+    </FORM>
+</div>

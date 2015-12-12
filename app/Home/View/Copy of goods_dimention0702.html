@@ -1,0 +1,23 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+					<tr  <if condition="$kk eq 1"> id="rowBase" </if> >
+							<td>
+							<html:select name="brand[]" options="brand"   selected=''  first="请选择品牌" />
+							</td>
+							<td>
+								<html:select name="lang[]" options="brand_lang"   selected=''  first="请选择语言" />
+							</td>
+							<td><input type="text" class="inputw50" name="color[]" value="" /></td>
+							
+								<td><input type="text" class="inputw20" name="num_xs[]" value="{$attr.num_xs}" /></td>
+								 <td><input type="text" class="inputw20" name="num_s[]" value="{$attr.num_s}" /></td>
+								 <td><input type="text" class="inputw20" name="num_m[]" value="{$attr.num_m}" /></td>
+								 <td><input type="text" class="inputw20" name="num_l[]" value="{$attr.num_l}" /></td>
+								 <td><input type="text" class="inputw20" name="num_xl[]" value="{$attr.num_xl}" /></td>
+								 <td><input type="text" class="inputw20" name="num_xxl[]" value="{$attr.num_xxl}" /></td>
+								
+							<td><textarea name="memo_attr[]" cols="10" rows="3"></textarea></td>
+							<td><input type="button" onclick="addTableRow()" value="新增一行" /></td>
+					</tr>
+

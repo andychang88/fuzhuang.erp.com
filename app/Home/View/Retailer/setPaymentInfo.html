@@ -1,0 +1,63 @@
+
+<div class='container mw-900px'>
+
+
+ 
+  <div id='titlebar'>
+    <div class='heading'>
+      <span class='prefix' title='USER'>设置付款信息</span>
+    </div>
+  </div>	
+
+     
+               <FORM method="post"  enctype="multipart/form-data" action="">
+                <INPUT type="hidden" name="id" value="{$vo.id}">
+                <INPUT type="hidden" name="paymentid" value="{$payment.id}">
+                <INPUT type="hidden" name="retailer_id" value="{$vo.retailer_id}">
+				<INPUT type="hidden" name="act" value="set_payment">
+				  
+               <notempty name="msg_tip">
+                <h2>{$msg_tip}</h2>
+               </notempty>
+               
+               <table align='center' class='table table-form'>
+			
+				<tr>
+               	<th>Sku：</th><td>{$vo.sku}
+				</td>
+               </tr>
+
+			   <tr>
+               	<th>应付款金额：</th><td>{$vo.total_amount}
+				</td>
+               </tr>
+
+				<tr>
+               	<th>实际付款金额：</th><td>
+				<input type="text" name="bill_amount" value="{$payment.paid_amount}" />
+				</td>
+               </tr>
+
+				<tr>
+               	<th>付款凭证：</th><td>
+				<input type="file" name="photo" />
+				</td>
+               </tr>
+			<tr>
+               	<th>备注说明：</th><td>
+				<textarea name="memo" cols="50" rows="3">{$payment.memo}</textarea>
+				</td>
+               </tr>
+				
+               	<td  class="text-center" colspan = 2>
+               	
+               	<button type='submit' id='submit' class='btn btn-submit btn-primary'>保存</button>
+               	<button type='reset' id='reset' class='btn btn-reset '>重置</button>
+               	</td>
+               </tr>
+			
+			
+               </table>
+    
+    </FORM>
+</div>

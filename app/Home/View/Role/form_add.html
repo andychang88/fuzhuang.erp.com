@@ -1,0 +1,15 @@
+<FORM method="post" id="search_frm"  action="__URL__/moduleList">
+<input type="hidden"   name="id" value="{$vo.id}" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+模块名：<input type="text" class="w-80px" name="name" value="{$vo.name}" />
+Controller:<input type="text"  class="w-80px" name="controller_name" value="<empty name="vo.controller_name">{$default_controller_name}<else />{$vo.controller_name}</empty>" />&nbsp;&nbsp;&nbsp;
+Action:<input type="text"  class="w-80px" name="method_name" value="{$vo.method_name}" />&nbsp;&nbsp;&nbsp;
+关键词:<input type="text"  class="w-80px" name="keyword1" value="{$vo.keyword1}" />&nbsp;&nbsp;&nbsp;
+关键词值:<input type="text"  class="w-80px" name="keyword1_val" value="{$vo.keyword1_val}" />&nbsp;&nbsp;&nbsp;
+排序：<input type="text"  class="w-40px" name="sort" value="{$vo.sort}" />
+
+&nbsp;&nbsp;&nbsp;&nbsp;<button type='submit' id='submit' class='btn btn-submit btn-primary'>提交</button>
+</FORM>
+<br>
+

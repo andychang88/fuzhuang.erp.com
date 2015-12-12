@@ -1,0 +1,8 @@
+
+/*css viciao style pagination*/
+div.viciao{margin:15px 20px;}
+div.viciao a{border:#8db5d7 1px solid;padding:2px 5px;color:#000;margin:0 2px 0 0;text-decoration:none;}
+div.viciao a:hover{border:red 1px solid;padding:2px 5px;margin:0 2px 0 0;}
+div.viciao a:active{border:red 1px solid;padding:2px 5px;margin:0 2px 0 0;}
+div.viciao span.current{border:#e89954 1px solid;padding:2px 5px;font-weight:bold;color:#000;margin:0 2px 0 0;background-color:#ffca7d;}
+div.viciao span.disabled{border:#ccc 1px solid;padding:2px 5px;color:#ccc;margin:0 2px 0 0;}

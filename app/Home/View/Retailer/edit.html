@@ -1,0 +1,55 @@
+ <meta charset='utf-8'><include file="./app/Home/View/header.html"  title="{$title}"  />
+<include file="./app/Home/View/Role/nav.html"   />
+
+               <FORM method="post" action="__URL__/update">
+               <table>
+			<if condition="$update_passwd eq true">
+				<tr>
+               	<td>用户名：</td><td>{$Think.get.retailer_name}
+				</td>
+               </tr>
+				<tr>
+               	<td>新登陆密码：</td><td><input type="password" name="passwd" value="" /></td>
+               </tr> 
+			   <tr>
+               	<td colspan = 2>
+               	 <INPUT type="hidden" name="id" value="{$Think.get.id}">
+               	<INPUT type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;
+               	<INPUT type="reset" value="重置">
+               	</td>
+               </tr>
+			<else />
+               <tr>
+               	<td>用户名：</td><td><input type="text" name="retailer_name" value="{$vo.retailer_name}" />
+				<a href="__URL__/updatePasswd/id/{$vo.id}/retailer_name/{$vo.retailer_name}">修改密码</a>
+				</td>
+               </tr>
+               
+			   <td>角色：</td><td>
+					<html:select name="role_id" options="roleNames"  selected='vo[role_id]' first="请选择用户角色" /> 
+				</td>
+                <tr>
+               	<td>用户等级：</td><td>
+				<html:select options='levels' name="level" selected='vo[level]' first="请选择等级" />
+				</td>
+               </tr>
+               
+                <tr>
+               	<td>备注：</td><td><textarea name="memo" cols="50" rows="3">{$vo.memo}</textarea></td>
+               </tr>
+               
+			   
+               <tr>
+               	<td colspan = 2>
+               	 <INPUT type="hidden" name="id" value="{$vo.id}">
+               	<INPUT type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;
+               	<INPUT type="reset" value="重置">
+               	</td>
+               </tr>
+            </if>
+			
+               </table>
+    
+    </FORM>
+     </body>
+    </html>

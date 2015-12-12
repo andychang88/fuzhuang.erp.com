@@ -1,0 +1,85 @@
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<include file="./app/Home/View/header.html"  title="{$title}"  />
+     
+    
+     <a href="__URL__/index">{$title_list}</a>
+     
+               <FORM method="post" action="__URL__/update"  enctype="multipart/form-data" >
+               <INPUT type="hidden" name="id" value="{$vo.id}">
+               <table>
+               
+               <tr>
+				       <td>Sku</td> <td><input type="text" name="sku" value="{$vo.sku}" /></td>
+			   </tr>	
+			    <tr>
+				       <td>品牌</td> <td><input type="text" name="brand" value="{$vo.brand}" /></td>
+			   </tr>	
+			   <tr>
+				       <td>产品描述</td> <td><input type="text" name="title" value="{$vo.title}" /></td>
+			   </tr>
+			   <tr>
+				       <td>颜色</td> <td><input type="text" name="color" value="{$vo.color}" /></td>
+			   </tr>
+			   <tr>
+				       <td>大小</td> <td>
+				       <input type="radio" name="size" value="{$vo.size}" />
+				       
+				       </td>
+			   </tr>
+			   
+			   <tr>
+				       <td>类型</td> <td>
+				       
+				        <select  id="reserve_type" name="type">
+				       	<option <if condition="$vo.type eq 1">selected</if> value="1">预订</option>
+				       	<option  <if condition="$vo.type eq 2">selected</if> value="2">退订</option>
+				       </select>
+				       
+				       </td>
+			   </tr>
+			   
+			   <tr>
+				       <td><span id="reserve_tip">预订数量</span></td> <td><input type="text" name="stock_total" value="{$vo.stock_total}" /></td>
+			   </tr>
+			   
+			  <tr>
+				       <td>产品图片</td> <td><input type="file" name="photo" />
+				       <notempty name="vo.photo"> 
+					        <a href="__PUBLIC__/{$vo.photo}" data-lightbox="{$vo.sku}-{$vo.id}" data-title="{$vo.title}">
+					        <img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.photo}" alt="{$vo.title}" />
+					        </a>
+				        </notempty>
+				        
+				       </td>
+			   </tr>
+			   <tr>
+				       <td>备注</td> <td><textarea name="memo" cols="50" rows="3">{$vo.memo}</textarea></td>
+			   </tr>
+			   		
+               <tr>
+               	<td colspan = 2>
+               	 
+               	<INPUT type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;
+               	<INPUT type="reset" value="重置">
+               	</td>
+               </tr>
+               
+               
+               
+               </table>
+    
+    </FORM>
+     <script language="javascript">
+    $(function(){
+		$('#reserve_type').change(function(){
+			var val = $(this).val();
+			var html = val == 1?'预订数量':'退订数量';
+			$('#reserve_tip').html(html);
+			
+		});
+    })
+    </script>
+     </body>
+    </html>

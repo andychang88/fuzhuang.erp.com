@@ -1,0 +1,73 @@
+
+
+<div class="main">
+
+<include file="./app/Home/View/Retailer/search_paymenthistory.html" />
+<br>
+
+<notempty name="msg_tip">
+                <h2>{$msg_tip}</h2>
+</notempty>
+               
+<table class='table table-condensed table-hover table-striped tablesorter table-fixed' >
+    <thead>
+    <tr class='colhead'>
+	        <th>编号</th>
+	        <th>产品单号</th>
+	        <th>付款金额</th>
+	        <th>付款凭证</th>
+	        <th>付款时间</th>
+	        <th>付款操作人</th>
+	        <th>付款状态</th>
+	        <th>备注</th>
+	        <th class="w-300px">操作</th>
+	</tr>
+	</thead>
+	<empty name="data">
+	 <tr><td  class='text-center'  colspan=9>没有数据</td></tr>
+	</empty>
+	
+    <volist name="data" id="vo">
+    	
+	    <tr  class='text-center' >
+	        <td>{$vo.id}</td>
+	        <td>{$vo.orderno}</td>
+	        <td>{$vo.paid_amount}</td>
+	        <td>
+	        
+	        <empty name="vo.cert_img"> 
+	        	{$vo.title} 
+	        <else />
+	        
+	        <a  rel="group"  href="__PUBLIC__/{$vo.cert_img}">
+	        <img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.cert_img}" alt="{$vo.orderno}"  title="{$vo.orderno}" />
+	        </a>
+	        </empty>
+	        
+	        </td>
+	        <td>{$vo.paid_time}</td>
+	        <td>{$vo.operator_name}</td>
+	         <td>{$vo.status_name}</td>
+	        <td>{$vo.memo}</td>
+	      
+	        <td>
+	        
+	        <if condition="$vo.audit_status eq 0 or $vo.audit_status eq 2">
+	        	<a href="__URL__/setPaymentInfo/id/{$vo.retailer2goods_id}/paymentid/{$vo.id}">编辑</a> <a  onclick="return confirm('确认要删除吗？');" href="__URL__/paymenthistory/delete/{$vo.id}">删除</a>
+	        </if>
+	        
+	        <if condition="$vo.audit_status eq 1">
+	        	审核已通过
+	        <elseif condition="$vo.audit_status eq 2" />
+	        	审核已驳回
+	        </if>
+	       
+	        </td>
+	    </tr>
+	  
+    </volist>
+    
+    <tr><td class="pager" colspan=9><div class="viciao">{$page}</div></td></tr>
+    </table>
+  </div>  
+    

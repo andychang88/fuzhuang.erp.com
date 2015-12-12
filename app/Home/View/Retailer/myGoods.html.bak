@@ -1,0 +1,69 @@
+
+<include file="./app/Home/View/header.html"  title="{$title}"  />
+       
+
+    <table>
+    
+    <tr>
+	        <th>编号</th>
+			<th>Sku</th>
+	        <th>产品图片</th>
+			<th>品牌</th>
+	        <th>颜色</th>
+	        <th>大小</th>
+	        <th>分配数量</th>
+	        <th>售出数量</th>
+	        <th>分配时间</th>
+	        <th>操作</th>
+	</tr>
+	
+    <volist name="data" id="vo">
+    	
+	    <tr>
+	        <td>{$vo.id}</td>
+			<td>{$vo.sku}</td>
+	        <td>
+			<empty name="vo.photo"> 
+	        	{$vo.title} 
+	        <else />
+	        
+	        <a  rel="group"  id="{$vo.sku}-{$vo.id}" href="__PUBLIC__/{$vo.photo}">
+	        <img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.photo}" alt="{$vo.title}"  title="{$vo.title}" />
+	        </a>
+	        
+              
+	        </empty>
+			</td>
+			<td>{$vo.brand}</td>
+	        <td>{$vo.color}</td>
+	        <td>{$vo.size}</td>
+	       
+	        <td>{$vo.retailer_amount}</td>
+	        <td>{$vo.sold_amount}</td>
+	       <td>{$vo.add_time|date="Y-m-d",###}</td>
+	        <td>
+
+			<if condition="$Think.session.is_admin neq 1 "> 
+				<a href="__URL__/edit/id/{$vo.id}">编辑</a>
+				<a href="__URL__/delete/id/{$vo.id}">删除</a>
+			</if>
+
+				<a href="__MODULE__/Soldrecords/add/goods_id/{$vo.goods_id}/sku/{$vo.sku}">添加售出</a>
+				<a href="__MODULE__/Soldrecords/index/goods_id/{$vo.goods_id}/sku/{$vo.sku}">查看售出</a>
+	        
+	        </td>
+	    </tr>
+	  
+    </volist>
+    
+	
+	<empty name="data">
+	<tr><td style="text-align:center;" colspan=20><div class="viciao">尚无数据</div></td></tr>
+	</empty>
+	
+	
+    </table>
+    
+    
+     </body>
+    </html>

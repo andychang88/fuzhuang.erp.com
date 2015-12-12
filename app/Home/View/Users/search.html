@@ -1,0 +1,19 @@
+<meta charset='utf-8'>
+               <FORM method="get" id="search_frm"  action="__ACTION__">
+               <table class="search_table">
+               
+               <tr>
+               	<td>角色</td><td><html:select name="role_id" options="roleNames" style="form-control" selected="role_id_selected" first="请选择用户角色" /></td>
+               	<td>加入时间</td><td><input  class="w-120px form-date" type="text" name="starttime" value="{$Think.get.starttime}" /> ~ <input  class="w-120px form-date" type="text" name="endtime" value="{$Think.get.endtime}" /></td>
+				
+				<td colspan = 2>
+               	<INPUT type="submit" value="查找">&nbsp;&nbsp;
+               	
+               	</td>
+               </tr>
+			   
+               
+               </table>
+   
+    </FORM>
+

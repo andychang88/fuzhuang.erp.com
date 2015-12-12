@@ -1,0 +1,22 @@
+<meta charset='utf-8'>
+      <FORM method="get" id="search_frm"  action="__ACTION__">
+      <table class="search_table">
+      
+      <tr>
+      	<td>单号</td>
+		<td><input type="text" name="orderno" value="{$Think.get.orderno}" />
+		</td>
+		<td>Sku</td>
+		<td><input type="text" name="sku" value="{$Think.get.sku}" />
+		</td>
+      	<td>分销商</td><td><html:select  name="retailer_id" options="retailers" first="请选择分销商" selected="retailer_id_selected"/></td>
+      	<td>售出时间</td><td><input  class="w-120px form-datetime" type="text" name="starttime" value="{$Think.get.starttime}" /> ~ <input  class="w-120px form-datetime" type="text" name="endtime" value="{$Think.get.endtime}" /></td>
+		
+		<td colspan = 2>
+         	<INPUT type="submit" value="查找">&nbsp;&nbsp;
+      	</td>
+      </tr>
+      </table>
+
+ </FORM>
+

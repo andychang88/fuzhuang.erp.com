@@ -1,0 +1,81 @@
+ <meta charset='utf-8'><include file="./app/Home/View/header.html"  title="{$title_index}"  />
+
+    
+    <include file="./app/Home/View/Role/nav.html"   />
+     
+               <FORM method="post" id="frm" <empty name='vo.id'> onsubmit="return checkPasswd();" </empty> action="__URL__/add">
+               
+           
+               <table>
+               
+       
+              
+               
+        <if condition="$updatePasswd eq 1">          
+              
+               <tr>
+               	<td>用户名：</td><td>{$vo.retailer_name}</td>
+               </tr>
+               
+              	<tr>
+               	<td>登陆密码：</td><td><input type="password" id="passwd" name="passwd" value="" /></td>
+                </tr> 
+              
+              
+        <else />        
+        	 <tr>
+               	<td>用户名：</td><td><input type="text" name="retailer_name" value="{$vo.retailer_name}" />
+               	<a href="__URL__/add/updatePasswd/1/id/{$vo.id}/retailer_name/{$vo.retailer_name}">修改密码</a>
+               	</td>
+               </tr>
+               
+              <empty name = "vo[id]">
+				<tr>
+               	<td>登陆密码：</td><td><input type="password" id="passwd" name="passwd" value="" /></td>
+                </tr> 
+              </empty>
+                 
+               <tr>
+               	<td>角色：</td><td>
+				
+				<html:select name="role_id" options="roleNames" selected="vo[role_id]" first="请选择用户角色" />
+				 
+				</td>
+               </tr>
+                <tr>
+               	<td>用户等级：</td><td>
+               	
+				<html:select options='levels' name="level" selected='vo[level]' first="请选择等级" />
+
+				</td>
+               </tr>
+               
+                <tr>
+               	<td>备注：</td><td><textarea name="memo" cols="50" rows="3">{$vo.memo}</textarea></td>
+               </tr>
+           </if>            
+               <tr>
+               	<td colspan = 2>
+               	<INPUT type="hidden" name="id" value="{$vo.id}">
+               	<INPUT type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;
+               	<INPUT type="reset" value="重置">
+               	</td>
+               </tr>
+       
+               </table>
+    <script language="javascript">
+	function checkPasswd(){
+		var val = $.trim($('#passwd').val());
+				if(val.length == 0){
+					alert('创建用户密码不能为空');
+					return false;
+				}
+				
+				return true;
+	}
+	
+		
+	</script>
+    </FORM>
+     </body>
+    </html>

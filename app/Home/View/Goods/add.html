@@ -1,0 +1,78 @@
+<div class='container mw-900px'>
+ 
+  <div id='titlebar'>
+    <div class='heading'>
+      <span class='prefix' title='USER'><empty name = "vo[id]">新建产品<else />编辑产品</empty></span>
+    </div>
+  </div>	
+    
+ 
+               <FORM   method="post"    class="form-condensed" action="__URL__/add"   enctype="multipart/form-data" >
+               <INPUT type="hidden" name="id" value="{$vo.id}">
+               <table align='center' class='table table-form'>
+               
+               <tr>
+				       <td class="right">Sku</td> <td><input type="text" name="sku" value="{$vo.sku}" /></td>
+			   </tr>
+
+			    <tr>
+				       <td class="right">明细</td> <td>
+					  <table id="tbl2">
+							<tr>
+							<th>品牌</th>
+							<th>语言</th>
+							<th>颜色</th>
+							
+							<th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th>
+							<th class="text-center" >备注</th>
+							<th>操作</th>
+							
+							</tr>
+							
+							<empty name="vo.plans_attr">
+								<include file="./app/Home/View/goods_dimention.html"    />
+							</empty>
+
+							<volist name="vo.plans_attr" id="attr" key="row_index">
+							
+								<include file="./app/Home/View/goods_dimention.html" attr="attr" key="row_index"    />
+								
+							</volist>					   
+
+
+
+							<tr id="trTotal"><td class="center"  colspan=10></td></tr>
+					   </table>
+
+
+					   
+					   </td>
+			   </tr>	
+
+			  
+			   <tr>
+				       <td class="right">产品描述</td> <td><input type="text" name="title" value="{$vo.title}" /></td>
+			   </tr>
+			  
+			  
+			   <tr>
+				       <td class="right">产品图片</td> <td><input type="file" name="photo" /></td>
+			   </tr>
+			   
+			   <tr>
+				       <td class="right">备注</td> <td><textarea name="memo" cols="50" rows="3">{$vo.memo}</textarea></td>
+			   </tr>
+			   		
+               <tr>
+               	<td  class="text-center padding20" colspan = 2>
+				
+             	<button type='submit' id='submit' class='btn btn-submit btn-primary'>保存</button>
+               	<button type='reset' id='reset' class='btn btn-reset '>重置</button>
+               	</td>
+               </tr>
+               
+               </table>
+    
+    </FORM>
+
+</div>

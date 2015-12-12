@@ -1,0 +1,18 @@
+<meta charset='utf-8'>
+      <FORM method="get" id="search_frm"  action="__ACTION__">
+      <table class="search_table">
+      
+      <tr>
+      	<td>申请人</td><td><html:select  name="apply_user_id" options="retailers" first="请选择分销商" selected="selected_apply_user_id"/></td>
+      	<td>申请时间</td><td><input  class="w-120px form-datetime" type="text" name="starttime" value="{$Think.get.starttime}" /> ~ <input  class="w-120px form-datetime" type="text" name="endtime" value="{$Think.get.endtime}" /></td>
+		<td>申请类型</td><td><html:select name="type" options="reserveType"   selected='selected_type'  first="请选择申请类型" style="w-90px" /></td>
+		<td>状态</td><td><html:select name="retailer_apply_status" options="retailer_apply_status"   selected='retailer_apply_status_selected'  first="请选择申请类型" style="w-90px" /></td>
+		
+		<td colspan = 2>
+         	<INPUT type="submit" value="查找">&nbsp;&nbsp;
+      	</td>
+      </tr>
+      </table>
+
+ </FORM>
+

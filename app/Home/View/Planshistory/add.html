@@ -1,0 +1,128 @@
+ <meta charset='utf-8'>
+<include file="./app/Home/View/header.html"  title="{$title}"  />
+    
+    <script language="javascript">
+		
+	</script>
+
+     <a href="__URL__/index/plans_id/{$vo.id}">返回{$vo.sku}的出货记录</a> <h3>添加{$vo.sku}的出货记录</h3>
+     
+               
+               
+               <table>
+               
+               <tr>
+				       <td class="right">Sku</td> 
+					   <td>
+					   <empty name="vo.photo"> 
+							{$vo.sku} 
+						<else />
+						
+						<a  rel="group"  id="{$vo.sku}-{$vo.id}" href="__PUBLIC__/{$vo.photo}">
+						<img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.photo}" alt="{$vo.title}"  title="{$vo.title}" />
+						</a>
+						</empty>
+					   </td>
+			   </tr>
+
+			    <tr>
+				       <td class="right">明细</td> <td>
+
+
+					   <table class="tbl2">
+							<tr>
+							<th class="center">品牌</th>
+							<th class="center">语言</th>
+							<th class="center">颜色</th>
+							<th>XS出货</th><th>S出货</th><th>M出货</th><th>L出货</th><th>XL出货</th><th>XXL出货</th>
+							<th class="center">备注</th>
+							<th>操作</th>
+							
+							</tr>
+
+							
+
+
+<volist name="vo.plans_attr" id="attr" key="kk">
+
+<FORM method="post" target="_blank" action="__URL__/insertRecord"  enctype="multipart/form-data" >
+ <INPUT type="hidden" name="plans_id" value="{$vo.id}">
+  <INPUT type="hidden" name="plans_attr_id" value="{$attr.id}">
+
+							<tr  <if condition="$kk eq 1"> id="rowBase" </if> >
+							<td>{$attr.brand}
+							<INPUT type="hidden" name="attr_ids[]" value="{$attr.id}">
+							
+							</td>
+							<td>
+							{$attr.lang}
+							</td>
+							<td>{$attr.color}</td>
+							
+								<td>
+								 <gt name="attr.num_xs" value="$attr.num_xs_ready">
+								<input type="text" class="inputw20" name="amount_ready[xs][]" value="" /><br>
+								</gt>
+								 (已{$attr.num_xs_ready}/共{$attr.num_xs|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_s" value="$attr.num_s_ready">
+								<input type="text" class="inputw20" name="amount_ready[s][]" value="" /><br>
+								</gt>
+								(已{$attr.num_s_ready}/共{$attr.num_s|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_m" value="$attr.num_m_ready">
+								<input type="text" class="inputw20" name="amount_ready[m][]" value="" /><br>
+								</gt>
+								(已{$attr.num_m_ready}/共{$attr.num_m|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_l" value="$attr.num_l_ready">
+								<input type="text" class="inputw20" name="amount_ready[l][]" value="" /><br>
+								 
+								</gt>
+								(已{$attr.num_l_ready}/共{$attr.num_l|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_xl" value="$attr.num_xl_ready">
+								<input type="text" class="inputw20" name="amount_ready[xl][]" value="" /><br>
+								 
+								</gt>
+								(已{$attr.num_xl_ready}/共{$attr.num_xl|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_xxl" value="$attr.num_xxl_ready">
+								<input type="text" class="inputw20" name="amount_ready[xxl][]" value="" /><br>
+								 
+								</gt>
+								(已{$attr.num_xxl_ready}/共{$attr.num_xxl|intval})
+								</td>
+
+								 
+							<td><textarea name="memo" cols="10" rows="3"></textarea></td>
+							<td>
+							 <input type="submit"  value="添加今日出货" />
+							</td>
+							</tr>
+    </FORM>
+</volist>		
+
+
+
+
+					   </table>
+
+					   </td>
+			   </tr>	
+
+			  
+			   
+			   		
+               
+               </table>
+    
+   
+
+     </body>
+    </html>

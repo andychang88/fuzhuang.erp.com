@@ -1,0 +1,74 @@
+
+<div class='container mw-1200px'>
+
+ 
+  <div id='titlebar'>
+    <div class='heading'>
+      <span class='prefix' title='USER'><empty name = "vo[id]">添加通知<else />编辑通知</empty></span>
+    </div>
+  </div>	
+	
+	<FORM method="post" name="frm" class="form-condensed" id="frm" <empty name='vo.id'> onsubmit="return checkForm();" </empty> action="">
+	
+	<table align='center' class='table table-form'>
+		<tr>
+        <th class='w-90px'>标题：</th>
+        <td class='w-p40'><input class="form-control" type="text" name="title" value="{$vo.title}" /></td><td></td><td></td>
+       </tr>
+      
+       <tr>
+        <th class='w-90px'>通知内容：</th>
+        <td class='w-p40'><textarea name="content" cols="180" rows="15">{$vo.content}</textarea>
+        <html:editor name="content" form_name="frm" type="KINDEDITOR"></html:editor>
+        </td><td></td><td></td>
+       </tr>
+       
+       <tr>
+        <th class='w-90px'>通知角色：</th>
+        <td class='w-p40'><html:select name="viewer_role_id" options="roleNames" change="changeUsersByRoleId(this)" style="form-control" selected="vo[viewer_role_id]" first="请选择用户角色" /></td><td></td><td></td>
+       </tr>
+       
+       <tr>
+        <th class='w-90px'>通知用户：</th>
+        <td class='w-p40'><select class="form-control" id="viewer_id" name="viewer_id">
+        <empty name="viewer_html">
+        	<option value="0">请选择用户</option>
+        <else />
+        	{$viewer_html}
+        </empty>
+        
+        </select></td><td></td><td></td>
+       </tr>
+       
+       
+       <tr><td colspan='2' class='text-center'>
+       			<INPUT type="hidden" name="id" value="{$vo.id}">
+               	<button type='submit' id='submit' class='btn btn-submit btn-primary'>发布</button>
+               	<button type='reset' id='reset' class='btn btn-reset '>重置</button>
+            
+       </td></tr>
+       
+	</table>
+	
+	</FORM>
+	
+	
+	
+</div>
+             
+              
+    <script language="javascript">
+  
+	function changeUsersByRoleId(obj){
+		var role_id = $(obj).val();
+		if ( role_id.length == 0){
+			return false;
+		}
+		var url = "__URL__/add/act/getUsersByRoleId/role_id/" + role_id;
+		$.get(url,{},function(data){
+			$('#viewer_id').html(data);
+		},'html');
+	}
+		
+	</script>
+    

@@ -1,0 +1,201 @@
+
+<div class='container mw-900px'>
+ 
+  <div id='titlebar'>
+    <div class='heading'>
+      <span class='prefix' title='USER'>分配产品给分销商</span>
+    </div>
+  </div>	
+    
+   
+               <FORM method="post"   class="form-condensed"  id="frm"   >
+			   <INPUT type="hidden" name="goods_id" value="{$vo.id}">
+			   <INPUT type="hidden" name="sku" value="{$vo.sku}">
+			    <INPUT type="hidden" id="total_amount"  name="total_amount" value="">
+			    
+               <table align='center' class='table table-form' id='attr_table'>
+               
+               <tr>
+				       <td>产品</td> <td>{$vo.title}--({$vo.sku})
+				      
+				       </td>
+			   </tr>	
+			   <tr>
+				       <td>分销商</td> <td>
+				       <html:select  name="retailer_id" options="retailers" first="请选择分销商" selected=""/> 
+				      
+				       </td>
+			   </tr>
+			   <tr>
+				       <td>价格</td> <td>
+				      <INPUT type="text"  name="price" value="">
+				      
+				       </td>
+			   </tr>
+			   
+
+
+
+			    <tr>
+				       <td class="right">明细</td> <td>
+
+
+
+					   <table id="tbl2">
+							<tr>
+							<th class="center">品牌</th>
+							<th class="center">语言</th>
+							<th class="center">颜色</th>
+							<th>XS分配数</th><th>S分配数</th><th>M分配数</th><th>L分配数</th><th>XL分配数</th><th>XXL分配数</th>
+							<th class="center">备注</th>
+							
+							
+							</tr>
+
+							
+
+
+<volist name="vo.plans_attr" id="attr" key="kk">
+
+  
+
+							<tr  <if condition="$kk eq 1"> id="rowBase" </if> >
+							<td>{$attr.brand}
+							<INPUT type="hidden" name="attr_id[]" value="{$attr.id}">
+							
+							</td>
+							<td>
+							{$attr.lang}
+							</td>
+							<td>{$attr.color}</td>
+							
+								<td>
+								 <gt name="attr.num_xs" value="$attr.num_xs_allocated">
+								<input type="text" class="w-60px" name="allo_amount[{$kk}][xs]" value="" /><br>
+								</gt>
+								 (已{$attr.num_xs_allocated}/共{$attr.num_xs|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_s" value="$attr.num_s_allocated">
+								<input type="text" class="w-60px" name="allo_amount[{$kk}][s]" value="" /><br>
+								</gt>
+								(已{$attr.num_s_allocated}/共{$attr.num_s|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_m" value="$attr.num_m_allocated">
+								<input type="text" class="w-60px" name="allo_amount[{$kk}][m]" value="" /><br>
+								</gt>
+								(已{$attr.num_m_allocated}/共{$attr.num_m|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_l" value="$attr.num_l_allocated">
+								<input type="text" class="w-60px" name="allo_amount[{$kk}][l]" value="" /><br>
+								 
+								</gt>
+								(已{$attr.num_l_allocated}/共{$attr.num_l|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_xl" value="$attr.num_xl_allocated">
+								<input type="text" class="w-60px" name="allo_amount[{$kk}][xl]" value="" /><br>
+								 
+								</gt>
+								(已{$attr.num_xl_allocated}/共{$attr.num_xl|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_xxl" value="$attr.num_xxl_allocated">
+								<input type="text" class="w-60px" name="allo_amount[{$kk}][xxl]" value="" /><br>
+								 
+								</gt>
+								(已{$attr.num_xxl_allocated}/共{$attr.num_xxl|intval})
+								</td>
+
+								 
+							<td><textarea name="memo[{$kk}]" cols="10" rows="3"></textarea></td>
+							
+							</tr>
+   
+</volist>		
+
+
+
+
+					   </table>
+
+					   </td>
+			   </tr>	
+
+
+
+				<tr>
+				       <td>付款总金额</td> <td>
+				     该供应商应该付款总金额为<span id="total_amount_show" >0</span>元（<span   style="font-weight:bold;color:blue;text-decoration:underline;cursor:pointer;" onclick="reCalculateTotalAmount()">点击这里重新计算</span>）
+				      
+				       </td>
+			   </tr>
+			   		
+               <tr>
+               <td  class="text-center padding20" colspan = 2>
+               	 
+               	<button type='submit' id='submit' class='btn btn-submit btn-primary'>分配</button>
+               	<button type='reset' id='reset' class='btn btn-reset '>重置</button>
+               	
+               	</td>
+               </tr>
+               
+               
+               
+               </table>
+
+			    </FORM>
+
+
+
+   <script language="javascript">
+ $(function(){ 
+    $("#frm").submit(function(){
+		return reCalculateTotalAmount();
+	});
+
+}); 
+
+function reCalculateTotalAmount(){
+	var price = $.trim($(document).find('input[name=price]').val());
+	if(price.length==0) price = 0;
+
+	var attr_table = $('#attr_table');
+	var num = 0;
+
+	attr_table.find('input[name^=allo_amount]').each(function(){
+		if($(this).val().length>0)
+		num = num + parseInt($(this).val());
+	});
+	var total_amount = (num * parseFloat(price)).toFixed(2);
+	$('#total_amount_show').html(total_amount);
+	$('#total_amount').val(total_amount);
+
+	return true;
+
+}
+function addAllo(obj){
+	
+	
+	var tr = $(obj).parents('tr:first');
+
+	var rid = $('#retailer_id_org').val();
+	var rprice = $('#price_org').val();
+
+	tr.find('input[name=retailer_id]').val(rid);
+	tr.find('input[name=price]').val(rprice);
+
+	$('#frm').find('input').remove();
+
+	tr.find('input').each(function(){
+		
+		$('#frm').append($(this).clone());
+	});
+	$('#frm').submit();
+	return false;
+}
+   </script>
+    
+</div>

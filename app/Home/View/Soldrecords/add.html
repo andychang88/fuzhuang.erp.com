@@ -1,0 +1,127 @@
+
+ 
+ <div class='container mw-900px'>
+ 
+  <div id='titlebar'>
+    <div class='heading'>
+      <span class='prefix' title='USER'>添加售出记录</span>
+    </div>
+  </div>	    
+               <FORM method="post" action="">
+               
+               <INPUT type="hidden" name="retailer2goods_id" value="{$vo.id}">
+               <INPUT type="hidden" name="retailer_id" value="{$vo.retailer_id}">
+               
+               <table>
+               
+               <tr>
+				       <td>Sku</td> <td>{$Think.get.sku}</td>
+			   </tr>	
+			 
+
+
+			 <tr>
+				       <td class="right">明细</td> <td>
+
+
+
+					   <table class="tbl2 table-bordered">
+					   <thead>
+							<tr>
+							<th class="center">品牌</th>
+							<th class="center">语言</th>
+							<th class="center">颜色</th>
+							<th>XS售出数</th><th>S售出数</th><th>M售出数</th><th>L售出数</th><th>XL售出数</th><th>XXL售出数</th>
+							<th class="center">备注</th>
+							
+							
+							</tr>
+						</thead>
+							
+
+
+<volist name="vo.plans_attr" id="attr" key="kk">
+
+  
+
+							<tr  <if condition="$kk eq 1"> id="rowBase" </if> >
+							<td>{$attr.brand}
+							<INPUT type="hidden" name="attr_id[]" value="{$attr.attr_id}">
+							
+							</td>
+							<td>
+							{$attr.lang}
+							</td>
+							<td>{$attr.color}</td>
+							
+								<td>
+								 <gt name="attr.num_xs" value="$attr.num_xs_sold">
+								<input type="text" class="w-40px" name="amount_ready[{$kk}][xs]" value="" /><br>
+								</gt>
+								 (已{$attr.num_xs_sold}/共{$attr.num_xs|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_s" value="$attr.num_s_sold">
+								<input type="text" class="w-40px" name="amount_ready[{$kk}][s]" value="" /><br>
+								</gt>
+								(已{$attr.num_s_sold}/共{$attr.num_s|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_m" value="$attr.num_m_sold">
+								<input type="text" class="w-40px" name="amount_ready[{$kk}][m]" value="" /><br>
+								</gt>
+								(已{$attr.num_m_sold}/共{$attr.num_m|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_l" value="$attr.num_l_sold">
+								<input type="text" class="w-40px" name="amount_ready[{$kk}][l]" value="" /><br>
+								 
+								</gt>
+								(已{$attr.num_l_sold}/共{$attr.num_l|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_xl" value="$attr.num_xl_sold">
+								<input type="text" class="w-40px" name="amount_ready[{$kk}][xl]" value="" /><br>
+								 
+								</gt>
+								(已{$attr.num_xl_sold}/共{$attr.num_xl|intval})
+								</td>
+								<td>
+								 <gt name="attr.num_xxl" value="$attr.num_xxl_sold">
+								<input type="text" class="w-40px" name="amount_ready[{$kk}][xxl]" value="" /><br>
+								 
+								</gt>
+								(已{$attr.num_xxl_sold}/共{$attr.num_xxl|intval})
+								</td>
+
+								 
+							<td><textarea name="memo[{$kk}]" cols="10" rows="3"></textarea></td>
+							
+							</tr>
+   
+</volist>		
+
+
+
+
+					   </table>
+
+					   </td>
+			   </tr>	
+
+
+
+
+			  
+               <tr>
+               	<td class=" text-center" colspan = 2>
+               	
+               	<button type='submit' id='submit' class='btn btn-submit btn-primary'>保存</button>
+               	<button type='reset' id='reset' class='btn btn-reset '>重置</button>
+               	</td>
+               </tr>
+               
+               </table>
+    
+    </FORM>
+</div>

@@ -1,0 +1,32 @@
+
+					<tr  <if condition="$row_index lt 2 "> id="rowBase" </if> >
+							<td>
+							
+							<html:select name="brand[]" options="brand"  style="form-control"    selected='attr[brand]'  first="请选择品牌" />
+							<notempty name="attr.id">
+								<INPUT type="hidden" name="attr_ids[]" value="{$attr.id}">
+							</notempty>
+							
+							</td>
+							<td>
+								<html:select name="lang[]" options="brand_lang"  style="form-control"   selected='attr[lang]'  first="请选择语言" />
+							</td>
+							<td><input type="text" class="w-40px" name="color[]" value="{$attr.color}" /></td>
+							
+								<td><input type="text" class="w-40px" name="num_xs[]" value="{$attr.num_xs}" /></td>
+								 <td><input type="text" class="w-40px" name="num_s[]" value="{$attr.num_s}" /></td>
+								 <td><input type="text" class="w-40px" name="num_m[]" value="{$attr.num_m}" /></td>
+								 <td><input type="text" class="w-40px" name="num_l[]" value="{$attr.num_l}" /></td>
+								 <td><input type="text" class="w-40px" name="num_xl[]" value="{$attr.num_xl}" /></td>
+								 <td><input type="text" class="w-40px" name="num_xxl[]" value="{$attr.num_xxl}" /></td>
+								
+							<td><textarea name="memo_attr[]" cols="10" rows="3">{$attr.memo_attr}</textarea></td>
+							<td>
+								<if condition="$row_index lt 2">
+									<input type="button" onclick="addTableRow()" value="新增一行" />
+								<else />
+									<input type="button" onclick="removeTableRow(this)" value="删除该行" />
+								</if> 
+							</td>
+					</tr>
+

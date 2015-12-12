@@ -1,0 +1,47 @@
+<div class='container mw-800px'>
+
+ 
+ 
+  <div id='titlebar'>
+    <div class='heading'>
+      <span class='prefix' title='USER'>修改密码</span>
+    </div>
+  </div>	
+     
+               <FORM method="post"  class="form-condensed" id="frm" <empty name='vo.id'> onsubmit="return checkPasswd();" </empty> action="__URL__/updatePasswd">
+               
+           
+               <table>
+	       			<tr>
+	               		<th>用户名：</th><td>{$retailer_name}</td>
+	              		</tr>
+	               
+		              	<tr>
+		               	<th>登陆密码：</th><td><input type="password" id="passwd" name="passwd" value="" /></td>
+	                </tr> 
+                 
+               <tr>
+               	<td colspan = 2>
+               	<INPUT type="hidden" name="id" value="{$id}">
+               	<INPUT type="submit" value="提交">&nbsp;&nbsp;&nbsp;&nbsp;
+               	<INPUT type="reset" value="重置">
+               	</td>
+               </tr>
+       
+               </table>
+    <script language="javascript">
+	function checkPasswd(){
+		var val = $.trim($('#passwd').val());
+				if(val.length == 0){
+					alert('创建用户密码不能为空');
+					return false;
+				}
+				
+				return true;
+	}
+	
+		
+	</script>
+    </FORM>
+    
+</div>

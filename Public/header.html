@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang='zh-cn'>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name="renderer" content="webkit"> 
+       <title>RMS-{$page_title}</title>
+       
+<script>var config={"webRoot":"\/","cookieLife":30,"requestType":"GET","pathType":"clean","requestFix":"-","moduleVar":"m","methodVar":"f","viewVar":"t","defaultView":"html","themeRoot":"\/theme\/","currentModule":"admin","currentMethod":"index","clientLang":"zh-cn","requiredFields":"","router":"\/index.php","timeout":30000};
+var lang={"submitting":"\u7a0d\u5019...","save":"\u4fdd\u5b58","timeout":"\u8fde\u63a5\u8d85\u65f6\uff0c\u8bf7\u68c0\u67e5\u7f51\u7edc\u73af\u5883\uff0c\u6216\u91cd\u8bd5\uff01"};
+</script>
+
+<script src='__PUBLIC__/Js/all.js?v=7.2'></script>
+<link rel='stylesheet' href='__PUBLIC__/theme/default/zh-cn.default.css?v=7.2' type='text/css' media='screen' />
+
+
+     </head>
+<body class="m-admin-index">
+     
+<header id='header'>
+
+  <div id='topbar'>
+    <div class='pull-right' id='topnav'>
+    	<div class='dropdown' id='userMenu'>
+	    	<a href='javascript:;' data-toggle='dropdown'><i class='icon-user'></i> {$Think.session.nickname} <span class='caret'></span></a>
+	    	<ul class='dropdown-menu'>
+			<li><a href='__MODULE__/Users/updatePasswd/id/{$Think.session.user_id}' target='' class='iframe' data-width='500'>更改密码</a></li>
+			</ul>
+		</div>
+		<a href='__MODULE__/Users/logout' >退出</a>
+		
+	</div>
+    <h5 id='companyname'>兔芭露服装产销管理系统    </h5>
+  </div>
+  
+  <nav id='mainmenu'>
+    <ul class='nav'>
+		<li class='active'><a href='__MODULE__/Retailer/myGoods' class='active' id='menumy'><i class="icon-home"></i><span> 我的产品</span></a></li>
+		<li ><a href='__MODULE__/retailerapply'  id='menuproduct'>预订退订申请</a></li>
+		<li ><a href='__MODULE__/goods'  id='menuproject'>总部产品</a></li>
+		<li ><a href='__MODULE__/plans'  id='menuqa'>生产计划单</a></li>
+		<li ><a href='__MODULE__/Users/index'  id='menudoc'>用户管理</a></li>
+		<li ><a href='__MODULE__/Finance/index'  id='menureport'>财务审核</a></li>
+	</ul>
+	
+  </nav>
+  
+  <nav id="modulemenu">
+    <ul class='nav'>
+		<li><span id="myname"><i class="icon-user"></i> {$Think.session.nickname}&nbsp;<i class="icon-angle-right"></i>&nbsp;</span></li>
+		<li class=' active'><a href='/index.php?m=my&f=index' target='' id=submenuindex>首页</a>
+		</li>
+		<li class=' '><a href='/index.php?m=my&f=todo' target='' id=submenutodo>待办</a>
+		</li>
+		<li class=' '><a href='/index.php?m=my&f=task' target='' id=submenutask>任务</a>
+		</li>
+		
+	</ul>
+  </nav>
+</header>
+
+
+
+
+     <script language="javascript">
+
+
+function addTableRow(){
+			var tmp_tr = $('#rowBase').clone();
+			tmp_tr.find('td:last').html('<input type="button" onclick="removeTableRow(this)" value="删除该行" />');
+			tmp_tr.find('input[name="attr_ids[]"]').val('');
+			
+			$('#trTotal').before(tmp_tr);
+		}
+	function removeTableRow(obj){
+			var tmp_tr = $(obj).parents('tr:first');
+			
+			var clone_input = tmp_tr.find('input[name="attr_ids[]"]').clone();
+			clone_input.attr('name','attr_ids_rm[]');
+			$(obj).parents('form:first').prepend(clone_input);
+			
+			tmp_tr.remove();
+		}
+
+	</script>
+
+1111111111111111111111111111<br>
+
+     
+    

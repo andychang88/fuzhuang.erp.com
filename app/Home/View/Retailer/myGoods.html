@@ -1,0 +1,140 @@
+<div class="main">
+
+ 
+<include file="./app/Home/View/Retailer/search.html" search_status="search_status" retailer_products_status_selected="retailer_products_status_selected" />
+<br>
+
+    <table class='table table-condensed table-hover table-striped tablesorter table-fixed' >
+    <thead>
+    
+    <tr>
+	        <th class="w-orderno">产品单号</th>
+			<th>Sku</th>
+	       	<th class="w-photo">产品图片</th>
+	        <th class="w-size">明细</th>
+			<th>供应商</th>
+			<th class="w-time">分配<br>时间</th>
+	        <th>单价</th>
+			<th>应付<br>金额</th>
+			<th>实付<br>金额</th>
+			<th>付款<br>凭证</th>
+			
+			<th>状态</th>
+	        <th class="w-operat">操作</th>
+	</tr>
+	</thead>
+    <volist name="data" id="vo">
+    	
+	   <tr  class='text-center' >
+	        <td><notempty name="vo.orderno"> {$vo.orderno}<else /> {$vo.id}</notempty></td>
+			<td>{$vo.sku}</td>
+	        <td>
+			<empty name="vo.photo"> 
+	        	{$vo.title} 
+	        <else />
+	        
+	        <a  rel="group"  id="{$vo.sku}-{$vo.id}" href="__PUBLIC__/{$vo.photo}">
+	        <img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.photo}" alt="{$vo.title}"  title="{$vo.title}" />
+	        </a>
+
+	        </empty>
+			</td>
+			<td>
+			
+				<table  class=" w-350px table-bordered" id="tbl2"  align="center" >
+						<notempty name="vo.plans_attr">
+							<tr>
+							<th class="center">品牌</th>
+							<th class="center">语言</th>
+							<th class="center">颜色</th>
+							<th>XS</th><th>S</th><th>M</th><th>L</th><th>XL</th><th>XXL</th>
+							<th class="center">备注</th>
+							</tr>
+						</notempty>
+						<volist name="vo.plans_attr" id="attr">
+							<tr>
+							<td>{$attr.brand}</td>
+							<td>{$attr.lang}</td>
+							<td>{$attr.color}</td>
+							<td>{$attr.num_xs}</td>
+							<td>{$attr.num_s}</td>
+							<td>{$attr.num_m}</td>
+							<td>{$attr.num_l}</td>
+							<td>{$attr.num_xl}</td>
+							<td>{$attr.num_xxl}</td>
+
+								
+								 
+							<td>{$attr.memo_attr}</td>
+							
+							</tr>
+					   </volist>
+
+							
+					   </table>
+			
+			
+			</td>
+			<td>{$vo.retailer_name}</td>
+	       <td>{$vo.add_time|format_time}</td>
+	       <td>{$vo.price}</td>
+		   <td>{$vo.total_amount}</td>
+		   <td>{$vo.bill_amount}</td>
+		   <td>
+		   <empty name="vo.bill_photo"> 
+	        	{$vo.title} 
+	        <else />
+	        
+	        <a  rel="group"  id="{$vo.sku}-{$vo.id}" href="__PUBLIC__/{$vo.bill_photo}">
+	        <img style="width:60px;height:60px;" src="__PUBLIC__/{$vo.bill_photo}" alt="{$vo.title}"  title="{$vo.title}" />
+	        </a>
+	        
+              
+	        </empty>
+		   </td>
+		   <td>{$vo.bill_status_name}</td>
+	        <td>
+
+			<if condition="$Think.session.is_admin eq 1 "> 
+				<a href="__URL__/edit/id/{$vo.id}">编辑</a>
+				<a href="__URL__/delete/id/{$vo.id}">删除</a><br>
+			</if>
+
+			<if condition="$vo.bill_status eq 1 "> 
+				<a href="__URL__/setPaymentInfo/id/{$vo.id}">设置付款信息</a>
+				<a href="__MODULE__/Finance/updateBillAmount/id/{$vo.id}/bill_status/4">废弃</a><br>
+			</if>
+
+			<if condition="$vo.bill_status eq 2 ">
+				<if condition="$Think.session.is_admin eq 1 "> 
+				<a href="__URL__/updateBillAmount/id/{$vo.id}/bill_status/3">审核通过</a>
+				</if>
+
+				<a href="__MODULE__/Finance/updateBillAmount/id/{$vo.id}/bill_status/1">设置为未付款</a><br>
+			</if>
+
+			<if condition="$vo.bill_status eq 3 ">
+				<!-- 已付款 -->
+				<a href="__MODULE__/Soldrecords/add/retailer2goods_id/{$vo.id}/sku/{$vo.sku}">添加售出</a><br>
+				<a href="__MODULE__/Soldrecords/index/retailer2goods_id/{$vo.id}">查看售出</a><br>
+			</if>
+			<if condition="$vo.bill_status eq 4 ">
+				已废弃
+			</if>
+				
+	        
+	        </td>
+	    </tr>
+	  
+    </volist>
+    <tr><td class="pager" colspan=12><div class="viciao">{$page}</div></td></tr>
+	
+	<empty name="data">
+	<tr><td style="text-align:center;" colspan=12><div class="viciao">尚无数据</div></td></tr>
+	</empty>
+	
+	
+    </table>
+    
+    
+ </div>

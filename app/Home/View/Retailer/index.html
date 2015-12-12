@@ -1,0 +1,41 @@
+ <meta charset='utf-8'>
+<include file="./app/Home/View/header.html"  title="{$title}"  />
+       
+<include file="./app/Home/View/Role/nav.html"   />
+
+    <table>
+    <tr>
+	        <th>编号</th>
+	        <th>用户名</th>
+			<th>角色</th>
+	        <th>等级</th>
+	        <th>加入时间</th>
+	        <th>备注</th>
+	        <th>操作</th>
+	</tr>
+	
+    <volist name="data" id="vo">
+    	
+	    <tr>
+	        <td>{$vo.id}</td>
+	        <td>{$vo.retailer_name}</td>
+			<td>{$vo.role_name}</td>
+	        <td>
+	         <if condition="($vo.level eq 1)"> 一级 </if>
+	         <if condition="($vo.level eq 2)"> 二级 </if>
+	         <if condition="($vo.level eq 3)"> 三级 </if>
+	        </td>
+	        <td>{$vo.add_time|date="Y-m-d",###}</td>
+	        <td>{$vo.memo}</td>
+	        <td><a href="__URL__/add/id/{$vo.id}">编辑</a> 
+	        <a href="__MODULE__/Role/priv/role_id/{$vo.id}">权限</a> 
+	        <a onclick="return confirm('确认要删除吗？');" href="__URL__/delete/id/{$vo.id}">删除</a></td>
+	    </tr>
+	  
+    </volist>
+    <tr><td class="pager" colspan=20><div class="viciao">{$page}</div></td></tr>
+    </table>
+    
+    
+     </body>
+    </html>
